@@ -155,6 +155,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 #+end_src
 
 * Services/MovieService
+#+begin_src 
 package is.hi.g.hikersicelands.hikersicelands.Services;
 
 import is.hi.g.hikersicelands.hikersicelands.Entities.Movie;
@@ -172,4 +173,5 @@ public interface MovieService {
     List<Movie> findByTitle(String title);
     Optional<Movie> findById(long id);
 }
+#+end_src
 
