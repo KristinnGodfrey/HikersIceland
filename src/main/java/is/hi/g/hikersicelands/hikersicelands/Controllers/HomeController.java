@@ -1,4 +1,4 @@
-package is.hi.g.hikersicelands.hikersicelands;
+package is.hi.g.hikersicelands.hikersicelands.Controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
