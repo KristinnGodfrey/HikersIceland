@@ -1,11 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="https://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<p>Velkomin á hikersicelands síðuna</p>
-
+<div th:switch="${hikes}">
+<!--    <h2 th:case="null">No hikes yet!</h2> -->
+    <div th:case="*">
+        <h2>hikes</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Rating</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="hike : ${hikes}">
+                <td th:text="${hike.name}"></td>
+                <td th:text="${hike.description}"></td>
+                <td th:text="${hike.location}"></td>
+                <td th:text="${hike.image}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/addhike">Add a new hike</a></p>
+</div>
 </body>
 </html>
