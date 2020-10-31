@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.validation.Valid;
 
 
 @Controller
@@ -16,8 +19,9 @@ public class HomeController {
     private ReviewService reviewService;
     @Autowired
     public HomeController(ReviewService reviewService){this.reviewService = reviewService;}
-    @RequestMapping("/")
-    public String Home() {
+
+    @RequestMapping("/Home")
+    public String Home(Model model) {
         return "Welcome";
     }
 
@@ -30,23 +34,25 @@ public class HomeController {
     public String Signup() {
         return "Signup";
     }
-
-    @RequestMapping("/Review")
-    public String Reviews(Model model){
+    @RequestMapping("/")
+    public String Reviews(Model model) {
         model.addAttribute("reviews", reviewService.findAll());
-        return "Reviews"
+        return "Reviews";
     }
-    @RequestMapping(value ="/addreview", method = RequestMethod.POST)
-    public String addReview(@Valid Review review, BindingResult result, Model model){
+    @RequestMapping(value = "/addreview", method = RequestMethod.POST)
+    public String addMovie(@Valid Review review, BindingResult result, Model model){
         if(result.hasErrors()){
-            model.addAttribute("error") //á eftir að útfæra "error"
+            return "Reviews";
         }
         reviewService.save(review);
-        model.addAttribute("review", reviewService.findAll());
-        return "Reviews"
+        model.addAttribute("reviews", reviewService.findAll());
+        return "add-review";
     }
-    @RequestMapping(value="/addreview",method = RequestMethod.GET)
-    public String addReviewForm(Model model){
-        return "add-review"
+    @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
+    public String deleteReview(@PathVariable("id") long id, Model model){
+        Review review = reviewService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid Review Id"));
+        reviewService.delete(review);
+        model.addAttribute("reviews", reviewService.findAll());
+        return "Reviews";
     }
 }
