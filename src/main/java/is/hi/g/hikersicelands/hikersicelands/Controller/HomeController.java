@@ -1,7 +1,5 @@
-package is.hi.g.hikersicelands.hikersicelands.Controllers;
+package is.hi.g.hikersicelands.hikersicelands.Controller;
 
-import is.hi.g.hikersicelands.hikersicelands.Entities.Hike;
-import is.hi.g.hikersicelands.hikersicelands.Services.HikeService;
 import is.hi.g.hikersicelands.hikersicelands.Entities.Review;
 import is.hi.g.hikersicelands.hikersicelands.Services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +16,11 @@ import javax.validation.Valid;
 @Controller
 public class HomeController {
 
-    private HikeService hikeService;
     private ReviewService reviewService;
     @Autowired
-    public HomeController(ReviewService reviewService, HikeService hikeService){
-        this.reviewService = reviewService;
-        this.hikeService = hikeService;
-    }
+    public HomeController(ReviewService reviewService){this.reviewService = reviewService;}
 
-    @RequestMapping("/")
+    @RequestMapping("/Home")
     public String Home(Model model) {
         return "Welcome";
     }
@@ -40,14 +34,13 @@ public class HomeController {
     public String Signup() {
         return "Signup";
     }
-
-//    @RequestMapping("/")
-//    public String Reviews(Model model) {
-//        model.addAttribute("reviews", reviewService.findAll());
-//        return "Reviews";
-//    }
+    @RequestMapping("/")
+    public String Reviews(Model model) {
+        model.addAttribute("reviews", reviewService.findAll());
+        return "Reviews";
+    }
     @RequestMapping(value = "/addreview", method = RequestMethod.POST)
-    public String addReview(@Valid Review review, BindingResult result, Model model){
+    public String addMovie(@Valid Review review, BindingResult result, Model model){
         if(result.hasErrors()){
             return "Reviews";
         }
@@ -55,21 +48,6 @@ public class HomeController {
         model.addAttribute("reviews", reviewService.findAll());
         return "add-review";
     }
-
-    @RequestMapping(value ="/addhike", method = RequestMethod.POST)
-    public String addHike(@Valid Hike hike, BindingResult result, Model model){
-        if(result.hasErrors()){
-            return "add-hike";
-        }
-        hikeService.save(hike);
-        model.addAttribute("hikes", hikeService.findAll());
-        return "Welcome";
-    }
-    @RequestMapping(value="/addhike", method = RequestMethod.GET)
-    public String addHikeForm(Hike hike){
-        return "add-hike";
-    }
-
     @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
     public String deleteReview(@PathVariable("id") long id, Model model){
         Review review = reviewService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid Review Id"));
