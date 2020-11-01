@@ -5,6 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-
+<form action="#" th:action="@{/addrating}" th:object="${review}" method="post">
+    <label for="rating">Rating</label>
+    <input type="text" th:field="*{rating}" id="rating" placeholder="Rating">
+</form>
 </body>
 </html>
