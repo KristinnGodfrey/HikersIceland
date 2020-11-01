@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -20,6 +21,7 @@ public class HomeController {
 
     private HikeService hikeService;
     private ReviewService reviewService;
+
     @Autowired
     public HomeController(ReviewService reviewService, HikeService hikeService){
         this.reviewService = reviewService;
@@ -28,6 +30,14 @@ public class HomeController {
 
     @RequestMapping("/")
     public String Home(Model model) {
+        model.addAttribute("hikes", hikeService.findAll());
+        return "Welcome";
+    }
+
+    @RequestMapping("/hike/{id}")
+    public String hikeId(@PathVariable("id") long id, Model model){
+        Hike hike = hikeService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
+        model.addAttribute("hikes", hike);
         return "Welcome";
     }
 
@@ -39,11 +49,6 @@ public class HomeController {
     @RequestMapping("/signup")
     public String Signup() {
         return "Signup";
-    }
-
-    @RequestMapping("/Reviews")
-    public String Reviews(Model model) { model.addAttribute("reviews", reviewService.findAll());
-       return "Reviews";
     }
 
     @RequestMapping(value = "/addreview", method = RequestMethod.POST)
@@ -65,6 +70,7 @@ public class HomeController {
         model.addAttribute("hikes", hikeService.findAll());
         return "Welcome";
     }
+
     @RequestMapping(value="/addhike", method = RequestMethod.GET)
     public String addHikeForm(Hike hike){
         return "add-hike";
