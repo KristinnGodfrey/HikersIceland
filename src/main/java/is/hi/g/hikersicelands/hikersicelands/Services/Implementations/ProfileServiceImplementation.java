@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+/*
 @Service
 public class ProfileServiceImplementation implements ProfileService {
 
@@ -39,6 +39,10 @@ public class ProfileServiceImplementation implements ProfileService {
     // leita að profile út frá nafni
     @Override
     public List<Profile> searchProfile(String name){
-        return repository.searchProfile(name);
+        return repository.searchProfileByName(name);
     }
+
+
 }
+
+ */

@@ -24,15 +24,6 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
-    @RequestMapping(value ="/createProfile")
-    public
 
 }
-
-
-
-    + viewProfile(profile: Profile): Profile
-    +submitLoginPost(username: String, password: String, model: Model): Profile
-    +createProfilePost(username: String, password: String, model: Model): Profile
- */
-
+*/
