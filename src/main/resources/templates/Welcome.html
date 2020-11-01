@@ -14,8 +14,9 @@
             <tr>
                 <th>Title</th>
                 <th>Description</th>
-                <th>Rating</th>
-                <th>Delete</th>
+                <th>Location</th>
+                <th>Image</th>
+                <th>id</th>
             </tr>
             </thead>
             <tbody>
@@ -24,6 +25,9 @@
                 <td th:text="${hike.description}"></td>
                 <td th:text="${hike.location}"></td>
                 <td th:text="${hike.image}"></td>
+                <td th:text="${hike.id}"></td>
+                <td><a href="@{/hike/${hike.id}}">SELECT</a></td>
+<!--                @{/hike/{id}(id=${hike.id})}-->
             </tr>
             </tbody>
         </table>
