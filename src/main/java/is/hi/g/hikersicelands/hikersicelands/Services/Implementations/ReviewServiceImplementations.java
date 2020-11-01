@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ReviewServieImplementations implements ReviewService {
+public class ReviewServiceImplementations implements ReviewService {
 
     ReviewRepository repository;
 
     @Autowired
-    public ReviewServieImplementations(ReviewRepository reviewRepository){this.repository = reviewRepository;}
+    public ReviewServiceImplementations(ReviewRepository reviewRepository){this.repository = reviewRepository;}
 
     @Override
     public Review save(Review review) {

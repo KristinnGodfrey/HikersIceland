@@ -34,20 +34,20 @@ public class Review {
         this.id = id;
     }
 
-    public String getNameOfHike() {
+    public String getHikeId() {
         return hikeId;
     }
 
-    public void setNameOfHike(String hikeId) {
+    public void sethikeId(String hikeId) {
         this.hikeId = hikeId;
     }
 
-    public String getNameOfUser() {
+    public String getuserId() {
         return userId;
     }
 
-    public void setNameOfUser(String nameOfUser) {
-        this.userId = nameOfUser;
+    public void setuserId(String userId) {
+        this.userId = userId;
     }
 
     public String getReviewText() {

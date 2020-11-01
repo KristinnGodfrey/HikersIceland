@@ -6,19 +6,7 @@
 </head>
 <body>
 <form action="#" th:action="@{/addhike}" th:object="${hike}" method="post">
-    <label for="name">Name</label>
-    <input type="text" th:field="*{name}" id="name" placeholder="name">
-    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-    <label for="description">Description</label>
-    <input type="text" th:field="*{description}" id="description" placeholder="Description">
-    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
-    <label for="location">Location</label>
-    <input type="text" th:field="*{location}" id="location" placeholder="location">
-    <span th:if="${#fields.hasErrors('location')}" th:errors="*{location}"></span>
-    <label for="image">Image</label>
-    <input type="text" th:field="*{image}" id="image" placeholder="image">
-    <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
-    <input type="submit" value="Add Hike">
+
 </form>
 
 </body>
