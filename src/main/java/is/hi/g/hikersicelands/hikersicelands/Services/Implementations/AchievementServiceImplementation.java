@@ -16,21 +16,25 @@ public class AchievementServiceImplementation implements AchievementService {
         this.repository = achievementRepository;
     }
 
+    // búa til Achievement
     @Override
     public Achievement save(Achievement achievement) {
         return repository.save(achievement);
     }
 
+    // eyða Achievement
     @Override
     public void delete(Achievement achievement) {
         repository.delete(achievement);
     }
 
+    // sækja lista af Achievements sem tilheyra hikeId
     @Override
     public List<Achievement> findAchievementsByHikeId(Long hikeId) {
         return repository.findAchievementsByHikeId(hikeId);
     }
 
+    // sækja Achievement út frá id
     @Override
     public Achievement findAchievementById(Long id) {
         return repository.findAchievementById(id);
