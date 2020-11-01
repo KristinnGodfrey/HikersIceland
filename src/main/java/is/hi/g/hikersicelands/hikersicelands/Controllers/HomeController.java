@@ -51,11 +51,13 @@ public class HomeController {
         return "Signup";
     }
 
+    //Finnur öll Review og birtir þau í "/reviews" url-inu
     @RequestMapping("/Reviews")
     public String Reviews(Model model) { model.addAttribute("reviews", reviewService.findAll());
         return "Reviews";
     }
 
+    //skoðar hvort ákveðið review sé valid og ef það er valid bætir því við í
     @RequestMapping(value = "/addreview", method = RequestMethod.POST)
     public String addReview(@Valid Review review, BindingResult result, Model model){
         if(result.hasErrors()){

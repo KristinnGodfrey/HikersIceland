@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
+
 @Entity
 public class Review {
     @Id
@@ -16,6 +18,9 @@ public class Review {
     private String reviewText;
     private int rating;
 
+    public Review(){
+
+    }
 
     // Smiður til þess að gera review object
     public Review(String hikeId, String userId, String reviewText, int rating) {
@@ -34,7 +39,7 @@ public class Review {
         this.id = id;
     }
 
-    public String getHikeId() {
+    public String gethikeId() {
         return hikeId;
     }
 
