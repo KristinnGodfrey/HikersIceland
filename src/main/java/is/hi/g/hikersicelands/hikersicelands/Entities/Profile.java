@@ -19,10 +19,12 @@ public class Profile {
     private int age;
     private boolean priv;
 
+    // Tómur smiður
     public Profile(){
 
     }
 
+    // Smiður
     public Profile(String username, String name, int age, boolean priv){
         this.username = username;
         this.name = name;
@@ -30,6 +32,7 @@ public class Profile {
         this.priv = priv;
     }
 
+    // Getters og setters
     public long getId(){return id;}
 
     public void setId(long id) {this.id = id;}
