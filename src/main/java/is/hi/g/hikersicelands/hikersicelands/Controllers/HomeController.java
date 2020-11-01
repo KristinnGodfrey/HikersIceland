@@ -41,11 +41,11 @@ public class HomeController {
         return "Signup";
     }
 
-//    @RequestMapping("/")
-//    public String Reviews(Model model) {
-//        model.addAttribute("reviews", reviewService.findAll());
-//        return "Reviews";
-//    }
+    @RequestMapping("/Reviews")
+    public String Reviews(Model model) { model.addAttribute("reviews", reviewService.findAll());
+       return "Reviews";
+    }
+
     @RequestMapping(value = "/addreview", method = RequestMethod.POST)
     public String addReview(@Valid Review review, BindingResult result, Model model){
         if(result.hasErrors()){

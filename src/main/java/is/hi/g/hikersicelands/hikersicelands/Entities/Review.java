@@ -11,21 +11,21 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String nameOfHike;
-    private String nameOfUser;
+    private String hikeId;
+    private String userId;
     private String reviewText;
     private int rating;
 
-    public Review() {
-    }
 
-    public Review(String nameOfHike, String nameOfUser, String reviewText, int rating) {
-        this.nameOfHike = nameOfHike;
-        this.nameOfUser = nameOfUser;
+    // Smiður til þess að gera review object
+    public Review(String hikeId, String userId, String reviewText, int rating) {
+        this.hikeId = hikeId;
+        this.userId = userId;
         this.reviewText = reviewText;
         this.rating = rating;
     }
 
+    // Getters og Setters fyrir allar breyturnar í þessu review entity
     public long getId() {
         return id;
     }
@@ -35,19 +35,19 @@ public class Review {
     }
 
     public String getNameOfHike() {
-        return nameOfHike;
+        return hikeId;
     }
 
-    public void setNameOfHike(String nameOfHike) {
-        this.nameOfHike = nameOfHike;
+    public void setNameOfHike(String hikeId) {
+        this.hikeId = hikeId;
     }
 
     public String getNameOfUser() {
-        return nameOfUser;
+        return userId;
     }
 
     public void setNameOfUser(String nameOfUser) {
-        this.nameOfUser = nameOfUser;
+        this.userId = nameOfUser;
     }
 
     public String getReviewText() {

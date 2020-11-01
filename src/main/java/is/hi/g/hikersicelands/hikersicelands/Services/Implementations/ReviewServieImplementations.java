@@ -34,9 +34,10 @@ public class ReviewServieImplementations implements ReviewService {
     }
 
     @Override
-    public List<Review> findBynameOfHike(String nameOfHike) {
-        return repository.findBynameOfHike(nameOfHike);
+    public List<Review> findByhikeId(String hikeId) {
+        return repository.findByhikeId(hikeId);
     }
+
 
     @Override
     public Optional<Review> findById(Long id) {

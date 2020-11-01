@@ -10,6 +10,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     Review save(Review review);
     void delete(Review review);
     List<Review> findAll();
-    List<Review> findBynameOfHike(String nameOfHike);
+    List<Review> findByhikeId(String hikeId);
     Optional<Review> findById(Long id);
 }
