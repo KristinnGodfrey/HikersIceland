@@ -1,4 +1,4 @@
-package is.hi.g.hikersicelands.hikersicelands;
+package is.hi.g.hikersicelands.hikersicelands.Controllers;
 
 import is.hi.g.hikersicelands.hikersicelands.Entities.Hike;
 import is.hi.g.hikersicelands.hikersicelands.Services.HikeService;
