@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ReviewServieImplementations implements ReviewService {
+public class ReviewServiceImplementations implements ReviewService {
 
     ReviewRepository repository;
 
     @Autowired
-    public ReviewServieImplementations(ReviewRepository reviewRepository){this.repository = reviewRepository;}
+    public ReviewServiceImplementations(ReviewRepository reviewRepository){this.repository = reviewRepository;}
 
     @Override
     public Review save(Review review) {
@@ -34,9 +34,10 @@ public class ReviewServieImplementations implements ReviewService {
     }
 
     @Override
-    public List<Review> findBynameOfHike(String nameOfHike) {
-        return repository.findBynameOfHike(nameOfHike);
+    public List<Review> findByhikeId(String hikeId) {
+        return repository.findByhikeId(hikeId);
     }
+
 
     @Override
     public Optional<Review> findById(Long id) {

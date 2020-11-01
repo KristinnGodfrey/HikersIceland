@@ -51,13 +51,23 @@ public class HomeController {
         return "Signup";
     }
 
+    @RequestMapping("/Reviews")
+    public String Reviews(Model model) { model.addAttribute("reviews", reviewService.findAll());
+        return "Reviews";
+    }
+
     @RequestMapping(value = "/addreview", method = RequestMethod.POST)
     public String addReview(@Valid Review review, BindingResult result, Model model){
         if(result.hasErrors()){
-            return "Reviews";
+            return "add-review";
         }
         reviewService.save(review);
         model.addAttribute("reviews", reviewService.findAll());
+        return "Reviews";
+    }
+
+    @RequestMapping(value="/addreview", method = RequestMethod.GET)
+    public String addReviewForm(Review review){
         return "add-review";
     }
 
@@ -83,4 +93,6 @@ public class HomeController {
         model.addAttribute("reviews", reviewService.findAll());
         return "Reviews";
     }
+
+
 }
