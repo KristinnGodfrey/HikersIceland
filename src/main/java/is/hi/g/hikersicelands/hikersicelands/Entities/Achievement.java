@@ -9,16 +9,18 @@ import javax.persistence.Id;
 public class Achievement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private long hikeId;
-    private String name;
-    private String description;
-    private int difficulty;
+    private long id; // Achievement Id
+    private long hikeId; // hikeId sem þetta Achievement tilheyrir
+    private String name; // titill
+    private String description; // skýring
+    private int difficulty; // erfiðleiki
 
+    // Tómur smiður
     public Achievement() {
 
     }
 
+    // Smiður
     public Achievement(long hikeId, String name, String description, int difficulty) {
         this.hikeId = hikeId;
         this.name = name;
@@ -26,6 +28,7 @@ public class Achievement {
         this.difficulty = difficulty;
     }
 
+    // Getters og setters
     public long getId() {
         return id;
     }

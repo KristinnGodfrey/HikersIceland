@@ -53,7 +53,8 @@ public class HomeController {
 
     //Finnur öll Review og birtir þau í "/reviews" url-inu
     @RequestMapping("/Reviews")
-    public String Reviews(Model model) { model.addAttribute("reviews", reviewService.findAll());
+    public String Reviews(Model model) {
+        model.addAttribute("reviews", reviewService.findAll());
         return "Reviews";
     }
 
@@ -69,7 +70,7 @@ public class HomeController {
     }
 
     @RequestMapping(value="/addreview", method = RequestMethod.GET)
-    public String addReviewForm(Review review){
+    public String addHikeForm(Review review){
         return "add-review";
     }
 
@@ -95,6 +96,5 @@ public class HomeController {
         model.addAttribute("reviews", reviewService.findAll());
         return "Reviews";
     }
-
 
 }

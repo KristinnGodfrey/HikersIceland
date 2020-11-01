@@ -5,8 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
-
 @Entity
 public class Review {
     @Id
@@ -18,7 +16,7 @@ public class Review {
     private String reviewText;
     private int rating;
 
-    public Review(){
+    public Review() {
 
     }
 
@@ -39,7 +37,7 @@ public class Review {
         this.id = id;
     }
 
-    public String gethikeId() {
+    public String getHikeId() {
         return hikeId;
     }
 
