@@ -31,3 +31,15 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Spring boot intellij ###
+.idea/
+HikersIceland.iml
+/*.classpath
+/.classpath
+/.springBeans
+*.DS_Store
+*.iml
+/build
+/local.properties
+target/

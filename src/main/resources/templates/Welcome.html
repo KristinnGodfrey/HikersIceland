@@ -26,8 +26,10 @@
                 <td th:text="${hike.location}"></td>
                 <td th:text="${hike.image}"></td>
                 <td th:text="${hike.id}"></td>
-                <td><a href="@{/hike/${hike.id}}">SELECT</a></td>
+                <td><a th:href="@{/hike/{id}/(id=${hike.id})}">SELECT</a></td>
 <!--                @{/hike/{id}(id=${hike.id})}-->
+<!--                @{/hike/${hike.id}}-->
+
             </tr>
             </tbody>
         </table>

@@ -16,16 +16,19 @@ public class HikeServiceImplementations implements HikeService {
     @Autowired
     public HikeServiceImplementations(HikeRepository hikeRepository){this.repository = hikeRepository;}
 
+    // vista hike
     @Override
     public Hike save(Hike hike) {
         return repository.save(hike);
     }
 
+    // ná í öll hikes
     @Override
     public List<Hike> findAll() {
         return repository.findAll();
     }
 
+    // ná í öll hikes þar sem id er tilgreint
     @Override
     public Optional<Hike> findById(Long id) {
         return repository.findById(id);
