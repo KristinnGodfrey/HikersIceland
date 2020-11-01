@@ -11,6 +11,6 @@ public interface ProfileService {
     Profile createProfile(String username, String password);
     Profile privateMode(boolean priv);
 
-    List<Profile> searchProfile(String name);
+    List<Profile> searchProfileByName(String name);
 
 }
