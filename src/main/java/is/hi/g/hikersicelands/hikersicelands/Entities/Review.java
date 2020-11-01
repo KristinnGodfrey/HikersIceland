@@ -16,6 +16,9 @@ public class Review {
     private String reviewText;
     private int rating;
 
+    public Review() {
+
+    }
 
     // Smiður til þess að gera review object
     public Review(String hikeId, String userId, String reviewText, int rating) {
