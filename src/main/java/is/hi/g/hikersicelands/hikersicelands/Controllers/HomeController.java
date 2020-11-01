@@ -1,4 +1,4 @@
-package is.hi.g.hikersicelands.hikersicelands.Controllers;
+package is.hi.g.hikersicelands.hikersicelands;
 
 import is.hi.g.hikersicelands.hikersicelands.Entities.Hike;
 import is.hi.g.hikersicelands.hikersicelands.Services.HikeService;
@@ -7,8 +7,6 @@ import is.hi.g.hikersicelands.hikersicelands.Services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -95,5 +93,9 @@ public class HomeController {
         return "Reviews";
     }
 
+    @RequestMapping("/signup")
+    public String Signup() {
+        return "Signup";
+    }
 
 }
