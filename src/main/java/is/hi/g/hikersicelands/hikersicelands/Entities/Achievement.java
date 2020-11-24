@@ -1,19 +1,19 @@
 package is.hi.g.hikersicelands.hikersicelands.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 public class Achievement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id; // Achievement Id
-    private long hikeId; // hikeId sem þetta Achievement tilheyrir
     private String name; // titill
     private String description; // skýring
     private int difficulty; // erfiðleiki
+
+    @ManyToOne
+    private Hike hike;
 
     // Tómur smiður
     public Achievement() {
@@ -22,7 +22,6 @@ public class Achievement {
 
     // Smiður
     public Achievement(long hikeId, String name, String description, int difficulty) {
-        this.hikeId = hikeId;
         this.name = name;
         this.description = description;
         this.difficulty = difficulty;
@@ -35,14 +34,6 @@ public class Achievement {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public long getHikeId() {
-        return hikeId;
-    }
-
-    public void setHikeId(long hikeId) {
-        this.hikeId = hikeId;
     }
 
     public String getName() {

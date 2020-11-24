@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface ProfileService {
 
-    Profile loginProfile(String username, String password);
-    Profile createProfile(String username, String password);
-    Profile privateMode(boolean priv);
+//    Profile loginProfile(String username, String password);
+    Profile saveProfile(Profile profile);
+//    Profile privateMode(boolean priv);
 
     List<Profile> searchProfileByName(String name);
 

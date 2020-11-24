@@ -1,15 +1,18 @@
 package is.hi.g.hikersicelands.hikersicelands.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Hike {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @OneToMany(mappedBy = "hike") // one Hike has multiple achievements
+    private List<Achievement> achievements = new ArrayList<>();
+
 
     private String name;
     private String description;
