@@ -1,0 +1,31 @@
+
+.myprofile input {
+    height: 25px;
+    width: 200px;
+    border-radius: 7px;
+}
+
+.myprofile-input h3 {
+    margin: 10px 0px;
+}
+
+.myprofile-input {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    width: 350px;
+    justify-content: space-between;
+}
+
+.submitDiv {
+    margin: 10px 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.successMessage {
+    margin-left: 30px;
+    color: green;
+    font-weight: bold;
+}

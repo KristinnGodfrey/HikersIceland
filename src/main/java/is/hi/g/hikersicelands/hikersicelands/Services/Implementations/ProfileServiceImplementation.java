@@ -18,11 +18,14 @@ public class ProfileServiceImplementation implements ProfileService {
         this.repository = profileRepository;
     }
 
-//    // Logga inn profile
-//    @Override
-//    public Profile loginProfile(String username, String password){
-//        return repository.loginProfile(username, password);
-//    }
+    // Logga inn profile
+    @Override
+    public Boolean loginProfile(String username, String password){
+        if (searchProfileByUsername(username).getPassword().equals(password)){
+            return true;
+        }
+        return false;
+    }
 
     // Búa til profile
     @Override
@@ -30,17 +33,22 @@ public class ProfileServiceImplementation implements ProfileService {
         return repository.save(profile);
     }
 
-//    // Setja profile á eða af private mode
-//    @Override
-//    public Profile privateMode(boolean priv){
-//        return repository.privateMode(priv);
-//    }
+    // Setja profile á eða af private mode
+    @Override
+    public Profile privateMode(boolean priv){
+        return privateMode(priv);
+    }
 
     // leita að profile út frá nafni
     @Override
     public List<Profile> searchProfileByName(String name){
-        return repository.searchProfileByName(name);
+        return repository.findByName(name);
     }
 
+    // leita að profile út frá unique nafni
+    @Override
+    public Profile searchProfileByUsername(String name){
+        return repository.findByUsername(name);
+    }
 
 }
