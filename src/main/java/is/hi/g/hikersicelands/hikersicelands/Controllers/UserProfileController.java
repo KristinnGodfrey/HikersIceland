@@ -24,6 +24,14 @@ public class UserProfileController {
         this.profileService = profileService;
     }
 
+    @RequestMapping("/myprofile")
+    public String myProfile(Model model, HttpSession httpSession) {
+        // TODO get current profile
+        Profile profile = new Profile("usernameee", "passss", 14, false);
+        model.addAttribute("profile", profile);
+        model.addAttribute("successMessage", "Updated successfully!");
+        return "myprofile";
+    }
 
 }
 
