@@ -10,7 +10,7 @@ public interface ProfileService {
     Profile loginProfile(String username, String password);
     Profile saveProfile(Profile profile);
     Profile privateMode(boolean priv);
-
     List<Profile> searchProfileByName(String name);
+
 
 }

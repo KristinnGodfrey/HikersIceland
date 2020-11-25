@@ -18,7 +18,7 @@ public class ProfileServiceImplementation implements ProfileService {
         this.repository = profileRepository;
     }
 
-//    // Logga inn profile
+    // Logga inn profile
     @Override
     public Profile loginProfile(String username, String password){
         return loginProfile(username, password);
@@ -30,7 +30,7 @@ public class ProfileServiceImplementation implements ProfileService {
         return repository.save(profile);
     }
 
-//    // Setja profile á eða af private mode
+    // Setja profile á eða af private mode
     @Override
     public Profile privateMode(boolean priv){
         return privateMode(priv);
@@ -41,6 +41,7 @@ public class ProfileServiceImplementation implements ProfileService {
     public List<Profile> searchProfileByName(String name){
         return repository.searchProfileByName(name);
     }
+
 
 
 }
