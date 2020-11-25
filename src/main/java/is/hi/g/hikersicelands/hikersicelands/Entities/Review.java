@@ -20,8 +20,7 @@ public class Review {
     }
 
     // Smiður til þess að gera review object
-    public Review(String userId, String reviewText, int rating, Hike hike) {
-        this.userId = userId;
+    public Review(String reviewText, int rating, Hike hike) {
         this.reviewText = reviewText;
         this.rating = rating;
         this.hike = hike;
