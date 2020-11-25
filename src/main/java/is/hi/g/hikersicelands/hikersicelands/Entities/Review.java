@@ -1,31 +1,30 @@
 package is.hi.g.hikersicelands.hikersicelands.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Review {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String hikeId;
     private String userId;
     private String reviewText;
     private int rating;
+
+    @ManyToOne
+    private Hike hike;
 
     public Review() {
 
     }
 
     // Smiður til þess að gera review object
-    public Review(String hikeId, String userId, String reviewText, int rating) {
-        this.hikeId = hikeId;
+    public Review(String userId, String reviewText, int rating, Hike hike) {
         this.userId = userId;
         this.reviewText = reviewText;
         this.rating = rating;
+        this.hike = hike;
     }
 
     // Getters og Setters fyrir allar breyturnar í þessu review entity
@@ -35,14 +34,6 @@ public class Review {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getHikeId() {
-        return hikeId;
-    }
-
-    public void sethikeId(String hikeId) {
-        this.hikeId = hikeId;
     }
 
     public String getuserId() {
@@ -67,5 +58,13 @@ public class Review {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public Hike getHike() {
+        return hike;
+    }
+
+    public void setHike(Hike hike) {
+        this.hike = hike;
     }
 }

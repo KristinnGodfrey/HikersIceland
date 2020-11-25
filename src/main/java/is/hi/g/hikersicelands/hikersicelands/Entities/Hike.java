@@ -7,12 +7,14 @@ import java.util.List;
 @Entity
 public class Hike {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @OneToMany(mappedBy = "hike") // one Hike has multiple achievements
     private List<Achievement> achievements = new ArrayList<>();
 
+    @OneToMany(mappedBy = "hike") // one Hike has multiple reviews
+    private List<Review> reviews = new ArrayList<>();
 
     private String name;
     private String description;
@@ -23,12 +25,13 @@ public class Hike {
 
     }
 
-    public Hike(long id, String name, String description, String location, String image) {
+    public Hike(long id, String name, String description, String location, String image, List<Achievement> achievements) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.location = location;
         this.image = image;
+        this.achievements = achievements;
     }
 
     public long getId() {
@@ -69,5 +72,21 @@ public class Hike {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public List<Achievement> getAchievements() {
+        return achievements;
+    }
+
+    public void setAchievements(List<Achievement> achievements) {
+        this.achievements = achievements;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }

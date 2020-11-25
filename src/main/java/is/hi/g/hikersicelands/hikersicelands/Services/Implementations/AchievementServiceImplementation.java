@@ -4,9 +4,11 @@ import is.hi.g.hikersicelands.hikersicelands.Entities.Achievement;
 import is.hi.g.hikersicelands.hikersicelands.Repositories.AchievementRepository;
 import is.hi.g.hikersicelands.hikersicelands.Services.AchievementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AchievementServiceImplementation implements AchievementService {
 
     AchievementRepository repository;
@@ -16,7 +18,7 @@ public class AchievementServiceImplementation implements AchievementService {
         this.repository = achievementRepository;
     }
 
-    // búa til Achievement
+    // bæta við Achievement
     @Override
     public Achievement save(Achievement achievement) {
         return repository.save(achievement);
@@ -24,8 +26,8 @@ public class AchievementServiceImplementation implements AchievementService {
 
     // eyða Achievement
     @Override
-    public void delete(Achievement achievement) {
-        repository.delete(achievement);
+    public void deleteAchievementById(Long id) {
+        repository.deleteAchievementById(id);
     }
 
     // sækja lista af Achievements sem tilheyra hikeId
