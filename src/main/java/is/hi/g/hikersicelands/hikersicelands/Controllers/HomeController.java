@@ -45,26 +45,6 @@ public class HomeController {
         return "Signup";
     }
 
-    @RequestMapping("/Reviews")
-    public String Reviews(Model model) {
-        model.addAttribute("reviews", reviewService.findAll());
-        return "Reviews";
-    }
-
-    @RequestMapping(value = "/addreview", method = RequestMethod.POST)
-    public String addReview(@Valid Review review, BindingResult result, Model model){
-        if(result.hasErrors()){
-            return "add-review";
-        }
-        reviewService.save(review);
-        model.addAttribute("reviews", reviewService.findAll());
-        return "Reviews";
-    }
-
-    @RequestMapping(value="/addreview", method = RequestMethod.GET)
-    public String addHikeForm(Review review){
-        return "add-review";
-    }
 
     @RequestMapping(value ="/addhike", method = RequestMethod.POST)
     public String addHike(@Valid Hike hike, BindingResult result, Model model){
@@ -82,7 +62,7 @@ public class HomeController {
     }
 
     @RequestMapping("/hike/{id}")
-    public String AddAchievement(@PathVariable("id") long id, Model model){
+    public String getHike(@PathVariable("id") long id, Model model){
         Hike hike = hikeService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
         model.addAttribute("hike", hike);
         Achievement achievement = new Achievement();
@@ -90,12 +70,6 @@ public class HomeController {
         return "Hike";
     }
 
-    @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
-    public String deleteReview(@PathVariable("id") long id, Model model){
-        Review review = reviewService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid Review Id"));
-        reviewService.delete(review);
-        model.addAttribute("reviews", reviewService.findAll());
-        return "Reviews";
-    }
+
 
 }
