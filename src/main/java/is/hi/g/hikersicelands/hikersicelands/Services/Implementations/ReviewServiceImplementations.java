@@ -17,28 +17,31 @@ public class ReviewServiceImplementations implements ReviewService {
     @Autowired
     public ReviewServiceImplementations(ReviewRepository reviewRepository){this.repository = reviewRepository;}
 
+    //Fall til þess að bæta við review í repository
     @Override
     public Review save(Review review) {
 
         return repository.save(review);
     }
-
+    //Fall til þess að eyða review, vantar að bæta við að admin geta bara notað þetta fall
     @Override
-    public void delete(Review review) {
-        repository.delete(review);
+    public void deleteReviewById(Long id) {
+        repository.deleteReviewById(id);
     }
 
+    //Fall til að birta öll review í repository
     @Override
     public List<Review> findAll() {
         return repository.findAll();
     }
 
+    //Fall til að birta öll Review fyrir ákveðið hike.
     @Override
     public List<Review> findByhikeId(String hikeId) {
         return repository.findByhikeId(hikeId);
     }
 
-
+    //Fall til að birta ákveðið review
     @Override
     public Optional<Review> findById(Long id) {
         return repository.findById(id);
