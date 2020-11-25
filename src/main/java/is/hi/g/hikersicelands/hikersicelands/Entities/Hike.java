@@ -14,7 +14,7 @@ public class Hike {
     private List<Achievement> achievements = new ArrayList<>();
 
     @OneToMany(mappedBy = "hike") // one Hike has multiple items
-    private List<Achievement> items = new ArrayList<>();
+    private List<Item> items = new ArrayList<>();
 
     @OneToMany(mappedBy = "hike") // one Hike has multiple reviews
     private List<Review> reviews = new ArrayList<>();
@@ -91,5 +91,13 @@ public class Hike {
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 }

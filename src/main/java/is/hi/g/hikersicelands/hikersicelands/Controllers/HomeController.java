@@ -2,6 +2,7 @@ package is.hi.g.hikersicelands.hikersicelands.Controllers;
 
 import is.hi.g.hikersicelands.hikersicelands.Entities.Achievement;
 import is.hi.g.hikersicelands.hikersicelands.Entities.Hike;
+import is.hi.g.hikersicelands.hikersicelands.Entities.Item;
 import is.hi.g.hikersicelands.hikersicelands.Services.HikeService;
 import is.hi.g.hikersicelands.hikersicelands.Entities.Review;
 import is.hi.g.hikersicelands.hikersicelands.Services.ReviewService;
@@ -67,6 +68,8 @@ public class HomeController {
         model.addAttribute("hike", hike);
         Achievement achievement = new Achievement();
         model.addAttribute("achievement", achievement);
+        Item item = new Item();
+        model.addAttribute("item", item);
         return "Hike";
     }
 
