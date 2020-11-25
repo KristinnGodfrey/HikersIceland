@@ -40,5 +40,14 @@ public class UserProfileController {
         model.addAttribute("Profile", new Profile());
         return "signup";
     }
+
+    @RequestMapping(value="/login", method = RequestMethod.GET)
+    public String login(@Valid Profile profile, BindingResult result, Model model){
+        if(result.hasErrors()){
+            return "login";
+        }
+        profileService.loginProfile(profile.getUsername(), profile.getPassword());
+        return "Welcome";
+    }
 }
 

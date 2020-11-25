@@ -20,8 +20,11 @@ public class ProfileServiceImplementation implements ProfileService {
 
     // Logga inn profile
     @Override
-    public Profile loginProfile(String username, String password){
-        return loginProfile(username, password);
+    public Boolean loginProfile(String username, String password){
+        if (searchProfileByUsername(username).getPassword().equals(password)){
+            return true;
+        }
+        return false;
     }
 
     // Búa til profile
@@ -39,9 +42,13 @@ public class ProfileServiceImplementation implements ProfileService {
     // leita að profile út frá nafni
     @Override
     public List<Profile> searchProfileByName(String name){
-        return repository.searchProfileByName(name);
+        return repository.findByName(name);
     }
 
-
+    // leita að profile út frá unique nafni
+    @Override
+    public Profile searchProfileByUsername(String name){
+        return repository.findByUsername(name);
+    }
 
 }
