@@ -12,5 +12,4 @@ public interface ProfileService {
     Profile privateMode(boolean priv);
     List<Profile> searchProfileByName(String name);
 
-
 }
