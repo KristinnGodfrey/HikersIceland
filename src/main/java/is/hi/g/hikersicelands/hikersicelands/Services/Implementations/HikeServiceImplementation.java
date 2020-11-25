@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class HikeServiceImplementations implements HikeService {
+public class HikeServiceImplementation implements HikeService {
     HikeRepository repository;
 
     @Autowired
-    public HikeServiceImplementations(HikeRepository hikeRepository){this.repository = hikeRepository;}
+    public HikeServiceImplementation(HikeRepository hikeRepository){this.repository = hikeRepository;}
 
     // vista hike
     @Override
