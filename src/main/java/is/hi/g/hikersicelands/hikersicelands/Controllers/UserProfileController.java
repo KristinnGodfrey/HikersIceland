@@ -7,11 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import sun.rmi.runtime.NewThreadAction;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -28,12 +25,39 @@ public class UserProfileController {
 
     @RequestMapping("/myprofile")
     public String myProfile(Model model, HttpSession httpSession) {
-        // TODO get current profile
-        Profile profile = new Profile("usernameee", "passss", 14, false);
+        // Get logged in username from session
+        String sessionUsername = (String) httpSession.getAttribute("username");
+        if(sessionUsername == null) {
+            model.addAttribute("profile", new Profile());
+            return "login";
+        }
+
+        Profile profile = profileService.searchProfileByUsername(sessionUsername);
+        if(profile == null) {
+            model.addAttribute("profile", new Profile());
+            return "login";
+        }
+
         model.addAttribute("profile", profile);
-        model.addAttribute("successMessage", "Updated successfully!");
         return "myprofile";
     }
+
+    @RequestMapping(value = "/myprofile", method = RequestMethod.POST)
+    public String myProfileUpdate(@Valid Profile profile, BindingResult result, Model model, HttpSession httpSession){
+        if(result.hasErrors()){
+            return "login";
+        }
+        // delete old
+        profileService.deleteProfileByUsername(profile.getUsername());
+
+        // create new
+        Profile newProfile = profileService.saveProfile(new Profile(profile.getUsername(), profile.getPassword(), profile.getName(), profile.getAge(), profile.getAdmin()));
+
+        model.addAttribute("profile", newProfile);
+        model.addAttribute("successMessage", "Updated successfully!");
+        return "myProfile";
+    }
+
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signup(@Valid Profile profile, BindingResult result, Model model){
         if(result.hasErrors()){

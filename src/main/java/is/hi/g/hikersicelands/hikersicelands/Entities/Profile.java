@@ -17,7 +17,7 @@ public class Profile {
     private String username;
     private String name;
     private int age;
-    private boolean priv;
+    private boolean admin;
 
     // Tómur smiður
     public Profile(){
@@ -25,11 +25,12 @@ public class Profile {
     }
 
     // Smiður
-    public Profile(String username, String name, int age, boolean priv){
+    public Profile(String username, String password, String name, int age, boolean admin){
         this.username = username;
+        this.password = password;
         this.name = name;
         this.age= age;
-        this.priv = priv;
+        this.admin = admin;
     }
 
     // Getters og setters
@@ -53,7 +54,7 @@ public class Profile {
 
     public void setAge(int age) {this.age = age;}
 
-    public boolean getPriv() {return priv;}
+    public boolean getAdmin() {return admin;}
 
-    public void setPriv(boolean priv) {this.priv = priv;}
+    public void setAdmin(boolean priv) {this.admin = priv;}
 }

@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>My Profile</h1>
-    <form action="#" th:object="${profile}" th:action="@{/myprofile/{id}(id=${profile.id})}" th:method="PATCH" >
+    <form action="#" th:object="${profile}" th:action="@{/myprofile}" th:method="PATCH" >
         <div class="myprofile-input">
             <H3>Name</H3>
             <input type="text" th:field="*{name}" id="name" placeholder="">
@@ -22,7 +22,7 @@
         </div>
         <div class="myprofile-input">
             <H3>Reset password</H3>
-            <input type="password" th:field="*{password}" id="password" placeholder="">
+            <input type="text" th:field="*{password}" id="password" placeholder="">
         </div>
         <div class="submitDiv">
             <input type="submit" value="Uppfæra" /></td>

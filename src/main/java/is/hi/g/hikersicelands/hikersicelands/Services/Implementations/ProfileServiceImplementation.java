@@ -51,4 +51,9 @@ public class ProfileServiceImplementation implements ProfileService {
         return repository.findByUsername(name);
     }
 
+    @Override
+    public void deleteProfileByUsername(String username) {
+        repository.deleteByUsername(username);
+    }
+
 }
