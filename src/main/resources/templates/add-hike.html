@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/mainstyle.css}"/>
 </head>
 <body>
 <form action="#" th:action="@{/addhike}" th:object="${hike}" method="post">
@@ -18,7 +19,7 @@
     <label for="image">Image</label>
     <input type="text" th:field="*{image}" id="image" placeholder="image">
     <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
-    <input type="submit" value="Add Hike">
+    <button type="submit" value="Add Hike">Add Hike</button>
 </form>
 
 </body>

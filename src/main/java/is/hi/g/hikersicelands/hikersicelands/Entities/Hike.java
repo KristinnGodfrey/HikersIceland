@@ -2,6 +2,7 @@ package is.hi.g.hikersicelands.hikersicelands.Entities;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -78,6 +79,7 @@ public class Hike {
     }
 
     public List<Achievement> getAchievements() {
+        Collections.reverse(achievements);
         return achievements;
     }
 
@@ -86,6 +88,7 @@ public class Hike {
     }
 
     public List<Review> getReviews() {
+        Collections.reverse(reviews);
         return reviews;
     }
 

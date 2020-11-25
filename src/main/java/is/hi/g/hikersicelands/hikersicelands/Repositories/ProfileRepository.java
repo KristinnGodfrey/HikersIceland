@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface ProfileRepository extends JpaRepository<Profile, Long>{
     Profile save(Profile profile);
-    List<Profile> searchProfileByName(String name);
+    Profile findByUsername(String username);
+    List<Profile> findByName(String name);
+
 }

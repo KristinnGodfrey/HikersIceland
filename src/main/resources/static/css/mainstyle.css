@@ -1,0 +1,95 @@
+:root {
+  --main-bg-color: #EDF5E1;
+  --2nd-bg-color: #05386B;
+  --3rd-bg-color; #5CBD95;
+}
+body {
+background-color: #5CBD95 !important;
+color: var(--main-bg-color);
+}
+table {
+    border: 2px solid var(--main-bg-color);
+    margin-left:auto;
+    margin-right:auto;
+    background-color: var(--2nd-bg-color);
+}
+table th {
+    background-color: var(--2nd-bg-color);
+    text-align: center;
+    padding: 10px;
+}
+table td {
+    max-width: 1000px;
+    border: 2px solid var(--main-bg-color);
+    word-break: break-all;
+}
+textarea.desc{
+     text-algin: left;
+     width:980px;
+     height:150px;
+     overflow-x: auto;
+}
+add.input{
+    display:inline-block;
+    padding:0.35em 1.2em;
+    border:0.1em solid #FFFFFF;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.12em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:#FFFFFF;
+    text-align:center;
+    transition: all 0.2s;
+}
+add.input:hover{
+    color:#000000;
+    background-color:#FFFFFF;
+}
+
+button{
+    display:inline-block;
+    padding:0.35em 1.2em;
+    border:0.1em solid #FFFFFF;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.12em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:#FFFFFF;
+    text-align:center;
+    transition: all 0.2s;
+}
+
+button:hover{
+    color:#000000;
+    background-color:#FFFFFF;
+}
+a:link {
+  color: red;
+  text-decoration: none;
+  appearance: button;
+}
+
+/* visited link */
+a:visited {
+  color: green;
+  text-decoration: none;
+  appearance: button;
+}
+
+/* mouse over link */
+a:hover {
+  color: hotpink;
+  text-decoration: none;
+  appearance: button;
+}
+
+/* selected link */
+a:active {
+  color: blue;
+  text-decoration: none;
+  appearance: button;
+}

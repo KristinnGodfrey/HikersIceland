@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title th:utext="${hike.name}"></title>
-    <link rel="stylesheet" th:href="@{/css/hike.css}"/>
+    <link rel="stylesheet" th:href="@{/css/mainstyle.css}"/>
 </head>
 <body>
 <div>
@@ -81,7 +81,18 @@
                 </tr>
             </thead>
             <tbody>
+            <!--Add achievement-->
+            <tr>
+                <form action="#" th:action="@{/hike/{id}/achievement(id=${hike.id})}" th:object="${achievement}" method="post">
+                    <td></td>
+                    <td><input type="text" th:field="*{name}" id="name" placeholder="Title"></td>
+                    <td><input type="text" th:field="*{description}" id="description" placeholder="Description"></td>
+                    <td><input type="number" min="0" max="5" th:field="*{difficulty}" id="difficulty" placeholder="Difficulty"></td>
+                    <td><input type="submit" value="Bæta við" /></td>
+                </form>
+            </tr>
             <tr th:each="achievement : ${hike.achievements}">
+
                 <td> <!--COMPLETE button-->
                     <form action="#" th:action="@{/hike/{hikeid}/achievement/{aid}/complete(hikeid=${hike.id}, aid=${achievement.id})}" th:method="PATCH" >
                         <input type="hidden" name="_method" value="complete" />
@@ -98,16 +109,7 @@
                     </form>
                 </td>
             </tr>
-            <!--Add achievement-->
-            <tr>
-                <form action="#" th:action="@{/hike/{id}/achievement(id=${hike.id})}" th:object="${achievement}" method="post">
-                    <td></td>
-                    <td><input type="text" th:field="*{name}" id="name" placeholder="Title"></td>
-                    <td><input type="text" th:field="*{description}" id="description" placeholder="Description"></td>
-                    <td><input type="number" min="0" max="5" th:field="*{difficulty}" id="difficulty" placeholder="Difficulty"></td>
-                    <td><input type="submit" value="Bæta við" /></td>
-                </form>
-            </tr>
+
             </tbody>
         </table>
 
