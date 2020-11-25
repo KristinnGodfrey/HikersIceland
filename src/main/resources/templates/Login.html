@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="https://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 <p> Velkomin á login síðuna </p>
+    <label for="username">Username</label>
+    <input type="text" th:field="*{username}" id="username" paceholder="name">
+    <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+    <label for="password">password</label>
+    <input type="text" th:field="*{password}" id="password" placeholder="password">
+    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+    <input type="submit" value="Login">
 </body>
 </html>

@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface ProfileService {
 
-//    Profile loginProfile(String username, String password);
+    Boolean loginProfile(String username, String password);
     Profile saveProfile(Profile profile);
-//    Profile privateMode(boolean priv);
-
+    Profile privateMode(boolean priv);
     List<Profile> searchProfileByName(String name);
+    Profile searchProfileByUsername(String name);
 
 }
