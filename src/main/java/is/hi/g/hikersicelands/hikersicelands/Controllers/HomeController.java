@@ -62,7 +62,7 @@ public class HomeController {
     }
 
     @RequestMapping("/hike/{id}")
-    public String AddAchievement(@PathVariable("id") long id, Model model){
+    public String getHike(@PathVariable("id") long id, Model model){
         Hike hike = hikeService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
         model.addAttribute("hike", hike);
         Achievement achievement = new Achievement();

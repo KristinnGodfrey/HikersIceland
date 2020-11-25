@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title th:utext="${hike.name}"></title>
+    <link rel="stylesheet" th:href="@{/css/hike.css}"/>
 </head>
 <body>
-<div th:switch="${hikes}">
-    <div th:case="*">
-        <h1 th:utext="${hike.name}"></h1>
-        <p th:utext="${hike.description}"></p>
-        <p th:utext="${hike.location}"></p>
+<div>
+    <a th:href="@{/}">Back</a>
+    <div class="hike-info">
+        <div clasS="hike-details">
+            <h1 class="hike-name" th:utext="${hike.name}"></h1>
+            <p class="hike-location" th:utext="${hike.location}"></p>
+            <p class="hike-description" th:utext="${hike.description}"></p>
+        </div>
+        <a th:href="@{/hike/{id}/reviews(id=${hike.id})}">View reviews</a>
     </div>
 
-    <a th:href="@{/hike/{id}/reviews(id=${hike.id})}">View reviews</a>
 
     <div>
         <h2>Achievements</h2>
