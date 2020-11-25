@@ -20,14 +20,14 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="hike : ${hikes}">
-                <td th:text="${hike.name}"></td>
-                <td th:text="${hike.description}"></td>
-                <td th:text="${hike.location}"></td>
-                <td th:text="${hike.image}"></td>
-                <td th:text="${hike.id}"></td>
-                <td><a th:href="@{/hike/{id}/(id=${hike.id})}">View</a></td>
-            </tr>
+                <tr th:each="hike : ${hikes}">
+                    <td th:text="${hike.name}"></td>
+                    <td th:text="${hike.description}"></td>
+                    <td th:text="${hike.location}"></td>
+                    <td th:text="${hike.image}"></td>
+                    <td th:text="${hike.id}"></td>
+                    <td><a th:href="@{/hike/{id}/(id=${hike.id})}">View</a></td>
+                </tr>
             </tbody>
         </table>
     </div>

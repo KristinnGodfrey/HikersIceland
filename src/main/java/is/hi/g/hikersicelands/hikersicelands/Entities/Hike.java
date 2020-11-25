@@ -13,6 +13,9 @@ public class Hike {
     @OneToMany(mappedBy = "hike") // one Hike has multiple achievements
     private List<Achievement> achievements = new ArrayList<>();
 
+    @OneToMany(mappedBy = "hike") // one Hike has multiple items
+    private List<Achievement> items = new ArrayList<>();
+
     @OneToMany(mappedBy = "hike") // one Hike has multiple reviews
     private List<Review> reviews = new ArrayList<>();
 
