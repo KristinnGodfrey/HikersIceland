@@ -19,10 +19,10 @@ public class ProfileServiceImplementation implements ProfileService {
     }
 
 //    // Logga inn profile
-//    @Override
-//    public Profile loginProfile(String username, String password){
-//        return repository.loginProfile(username, password);
-//    }
+    @Override
+    public Profile loginProfile(String username, String password){
+        return loginProfile(username, password);
+    }
 
     // Búa til profile
     @Override
@@ -31,10 +31,10 @@ public class ProfileServiceImplementation implements ProfileService {
     }
 
 //    // Setja profile á eða af private mode
-//    @Override
-//    public Profile privateMode(boolean priv){
-//        return repository.privateMode(priv);
-//    }
+    @Override
+    public Profile privateMode(boolean priv){
+        return privateMode(priv);
+    }
 
     // leita að profile út frá nafni
     @Override
