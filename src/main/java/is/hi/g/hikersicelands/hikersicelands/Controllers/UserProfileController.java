@@ -14,15 +14,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
-//@Controller
-//public class ProfileController {
-//
-//    private ProfileService profileService;
-//
-//    @Autowired
-//    public ProfileController(ProfileService profileService){
-//        this.profileService = profileService;
-//    }
-//
-//
-//}
+@Controller
+public class UserProfileController {
+
+    private ProfileService profileService;
+
+    @Autowired
+    public UserProfileController(ProfileService profileService){
+        this.profileService = profileService;
+    }
+
+
+}
+
