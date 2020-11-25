@@ -5,25 +5,38 @@
     <title>Title</title>
 </head>
 <body>
-<div th:switch="${reviews}">
-    <h2 th:case="null">No Reviews yet!</h2>
-    <div th:case="*">
+    <div>
         <h2>Reviews</h2>
         <table>
             <thead>
             <tr>
                 <th>Rating</th>
+                <th>Review</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="review : ${reviews}">
+
+            <tr th:each="review : ${hike.reviews}">
                 <td th:text="${review.rating}"></td>
-                <td><a th:href="@{/delete/{id}(id=${review.id})}">Delete</a></td>
+                <td th:text="${review.reviewText}"></td>
+                <td> <!--DELETE button-->
+                    <form action="#" th:action="@{/hike/{hikeid}/review/{aid}(hikeid=${hike.id}, aid=${review.id})}" th:method="DELETE" >
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit" id="submitButton">Eyða</button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <form action="#" th:action="@{/hike/{id}/reviews(id=${hike.id})}" th:object="${review}" method="post">
+                    <td></td>
+                    <td><input type="text" th:field="*{reviewText}" id="description" placeholder="Review"></td>
+                    <td><input type="number" min="0" max="5"  th:field="*{rating}" id="rating" placeholder="0-5"></td>
+                    <td><input type="submit" value="Bæta við" /></td>
+                </form>
             </tr>
             </tbody>
         </table>
     </div>
-    <p><a href="/addreview">Add a new Review</a></p>
 </div>
 </body>
 </html>

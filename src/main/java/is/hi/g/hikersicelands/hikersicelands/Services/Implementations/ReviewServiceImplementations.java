@@ -25,8 +25,8 @@ public class ReviewServiceImplementations implements ReviewService {
     }
     //Fall til þess að eyða review, vantar að bæta við að admin geta bara notað þetta fall
     @Override
-    public void delete(Review review) {
-        repository.delete(review);
+    public void deleteReviewById(Long id) {
+        repository.deleteReviewById(id);
     }
 
     //Fall til að birta öll review í repository
