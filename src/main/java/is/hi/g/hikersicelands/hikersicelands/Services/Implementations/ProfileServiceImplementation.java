@@ -20,11 +20,12 @@ public class ProfileServiceImplementation implements ProfileService {
 
     // Logga inn profile
     @Override
-    public Boolean loginProfile(String username, String password){
-        if (searchProfileByUsername(username).getPassword().equals(password)){
+    public Boolean loginProfile(String username, String password) {
+        Profile profile = searchProfileByUsername(username);
+        if (profile == null) return false;
+        if (profile.getPassword().equals(password)) {
             return true;
-        }
-        return false;
+        } else return false;
     }
 
     // Búa til profile

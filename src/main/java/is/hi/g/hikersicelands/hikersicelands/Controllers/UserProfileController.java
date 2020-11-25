@@ -1,7 +1,9 @@
 package is.hi.g.hikersicelands.hikersicelands.Controllers;
 
+import is.hi.g.hikersicelands.hikersicelands.Entities.Hike;
 import is.hi.g.hikersicelands.hikersicelands.Entities.Profile;
 import is.hi.g.hikersicelands.hikersicelands.Services.ProfileService;
+import is.hi.g.hikersicelands.hikersicelands.Services.HikeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +19,12 @@ import javax.validation.Valid;
 public class UserProfileController {
 
     private ProfileService profileService;
+    private HikeService hikeService;
 
     @Autowired
-    public UserProfileController(ProfileService profileService){
+    public UserProfileController(ProfileService profileService, HikeService hikeService){
         this.profileService = profileService;
+        this.hikeService = hikeService;
     }
 
     @RequestMapping("/myprofile")
@@ -64,6 +68,7 @@ public class UserProfileController {
             return "signup";
         }
         profileService.saveProfile(profile);
+        model.addAttribute("hikes", hikeService.findAll());
         return "Welcome";
     }
 
@@ -73,13 +78,25 @@ public class UserProfileController {
         return "signup";
     }
 
-    @RequestMapping(value="/login", method = RequestMethod.GET)
+    @RequestMapping(value="/login", method = RequestMethod.POST)
     public String login(@Valid Profile profile, BindingResult result, Model model){
-        if(result.hasErrors()){
+        if(result.hasErrors() | profile.getUsername().equals(null) | profile.getPassword().equals(null)){
             return "login";
         }
-        profileService.loginProfile(profile.getUsername(), profile.getPassword());
-        return "Welcome";
+        if (profileService.loginProfile(profile.getUsername(), profile.getPassword())){
+            model.addAttribute("hikes", hikeService.findAll());
+            return "Welcome";
+        }
+        else return "login";
+
+
+
+    }
+
+    @RequestMapping(value="/login", method = RequestMethod.GET)
+    public String addLoginForm(Profile profile, Model model){
+        model.addAttribute("Profile", new Profile());
+        return "login";
     }
 }
 
