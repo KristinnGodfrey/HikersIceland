@@ -1,10 +1,10 @@
 :root {
-  --main-bg-color: #EDF5E1; /* Hvítur */
-  --2nd-bg-color: #05386B; /*Blár */
-  --3rd-bg-color; #5CBD95; /*Grænn */
+  --main-bg-color: #2D3E4E; /* Svartblár */
+  --2nd-bg-color: #8CBDB9; /* Sægrænn */
+  --3rd-bg-color; #E09E50; /*Grænn */
 }
 body {
-background-color: #5CBD95 !important;
+background-color: #E8ECEB !important;
 color: var(--main-bg-color);
 font-size: 24px;
 }
@@ -124,5 +124,5 @@ h2 {
     margin: auto;
     width: 100%;
     text-align: center;
-    color: #EDF5E1;
+    color: var(--main-bg-color);
 }
