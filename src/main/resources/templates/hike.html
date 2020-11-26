@@ -117,7 +117,7 @@
                 <tr>
                     <form action="#" th:action="@{/hike/{id}/item(id=${hike.id})}" th:object="${item}" method="post">
                         <td><input type="text" th:field="*{name}" id="itemName" placeholder="Title"></td>
-                        <td><input type="text" th:field="*{description}" id="itemDescription" placeholder="Description"></td>
+                        <td><Textarea class="desc" type="text" th:field="*{description}" id="itemDescription" placeholder="Description"></Textarea></td>
                         <td>
                             <select name="itemType">
                                 <option th:each="itemType : ${T(is.hi.g.hikersicelands.hikersicelands.Entities.ItemType).values()}"
@@ -151,7 +151,7 @@
                     <td><input type="text" th:field="*{name}" id="name" placeholder="Title"></td>
                     <td><textarea class="desc" type="text" th:field="*{description}" id="description" placeholder="Description"></textarea></td>
                     <td><input type="number" min="0" max="5" th:field="*{difficulty}" id="difficulty" placeholder="Difficulty"></td>
-                    <td><input class = "add" type="submit" value="Bæta við" /></td>
+                    <td><input type="submit" value="Bæta við" /></td>
                 </form>
             </tr>
             <tr th:each="achievement : ${hike.achievements}">
