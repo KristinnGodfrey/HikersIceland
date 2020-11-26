@@ -26,8 +26,8 @@
             <tr th:each="review : ${hike.reviews}">
                 <td th:text="${review.rating}"></td>
                 <td th:text="${review.reviewText}"></td>
-                <td> <!--DELETE button-->
-                    <form action="#" th:action="@{/hike/{hikeid}/review/{aid}(hikeid=${hike.id}, aid=${review.id})}" th:method="DELETE" >
+                <td th:if="${profile}"> <!--DELETE button-->
+                    <form th:if="${profile.admin}" action="#" th:action="@{/hike/{hikeid}/review/{aid}(hikeid=${hike.id}, aid=${review.id})}" th:method="DELETE" >
                         <input type="hidden" name="_method" value="delete" />
                         <button class="del" type="submit" id="submitButton">Delete</button>
                     </form>
