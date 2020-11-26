@@ -2,17 +2,25 @@ package is.hi.g.hikersicelands.hikersicelands.Controllers;
 
 import is.hi.g.hikersicelands.hikersicelands.Entities.*;
 import is.hi.g.hikersicelands.hikersicelands.Services.HikeService;
+<<<<<<< HEAD
 import is.hi.g.hikersicelands.hikersicelands.Services.ItemService;
+=======
+import is.hi.g.hikersicelands.hikersicelands.Entities.Review;
+import is.hi.g.hikersicelands.hikersicelands.Services.ProfileService;
+>>>>>>> f8af64d73a2d1006bfb7cbb9f9c45d1ad0a7eb18
 import is.hi.g.hikersicelands.hikersicelands.Services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.HttpSessionRequiredException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,15 +33,21 @@ public class HomeController {
     private HikeService hikeService;
     private ItemService itemService;
     private ReviewService reviewService;
-
+    private ProfileService profileService;
     @Autowired
-    public HomeController(ReviewService reviewService, HikeService hikeService){
+    public HomeController(ReviewService reviewService, HikeService hikeService, ProfileService profileService){
         this.reviewService = reviewService;
         this.hikeService = hikeService;
+        this.profileService = profileService;
     }
 
     @RequestMapping("/")
-    public String Home(Model model) {
+    public String Home(Model model, HttpSession httpSession) {
+
+        String sessionUsername = (String) httpSession.getAttribute("username");
+        if( sessionUsername == null){
+            model.addAttribute("profile",profileService.searchProfileByUsername(sessionUsername));
+        }
         model.addAttribute("hikes", hikeService.findAll());
         return "Welcome";
     }
