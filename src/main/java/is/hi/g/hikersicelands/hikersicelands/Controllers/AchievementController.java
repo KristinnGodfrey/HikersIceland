@@ -67,8 +67,11 @@ public class AchievementController {
         }
         String sessionUsername = (String) httpSession.getAttribute("username");
         if (sessionUsername == null) {
-            return "welcome";
+            model.addAttribute("profile", new Profile());
+            return "login";
         }
+
+        achievement = achievementService.findAchievementById(id);
 
         achievementService.save(new Achievement(achievement.getName(), achievement.getDescription(), achievement.getDifficulty(), achievement.getHike(), true));
 
