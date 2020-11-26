@@ -43,6 +43,8 @@ public class HomeController {
 
         String sessionUsername = (String) httpSession.getAttribute("username");
         if( sessionUsername == null){
+            model.addAttribute("profile", null);
+        } else {
             model.addAttribute("profile",profileService.searchProfileByUsername(sessionUsername));
         }
         model.addAttribute("hikes", hikeService.findAll());
