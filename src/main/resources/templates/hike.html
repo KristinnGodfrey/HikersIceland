@@ -63,9 +63,9 @@
                 <td th:text="${item.name}"></td>
                 <td th:text="${item.description}"></td>
                 <td th:text="${item.itemType.displayValue}"></td>
-                <td>
+                <td th:if="${profile}">
                     <!--                    DELETE button-->
-                    <form action="#" th:action="@{/hike/{hikeid}/item/{aid}(hikeid=${hike.id}, aid=${item.id})}" th:method="DELETE" >
+                    <form th:if="${profile.admin}" action="#" th:action="@{/hike/{hikeid}/item/{aid}(hikeid=${hike.id}, aid=${item.id})}" th:method="DELETE" >
                         <input type="hidden" name="_method" value="delete" />
                         <button type="submit" id="submitWildlife">Eyða</button>
                     </form>
@@ -92,9 +92,9 @@
                 <td th:text="${item.name}"></td>
                 <td th:text="${item.description}"></td>
                 <td th:text="${item.itemType.displayValue}"></td>
-                <td>
+                <td th:if="${profile}">
                     <!--                    DELETE button-->
-                    <form action="#" th:action="@{/hike/{hikeid}/item/{aid}(hikeid=${hike.id}, aid=${item.id})}" th:method="DELETE" >
+                    <form th:if="${profile.admin}" action="#" th:action="@{/hike/{hikeid}/item/{aid}(hikeid=${hike.id}, aid=${item.id})}" th:method="DELETE" >
                         <input type="hidden" name="_method" value="delete" />
                         <button type="submit" id="submitFlora">Eyða</button>
                     </form>
