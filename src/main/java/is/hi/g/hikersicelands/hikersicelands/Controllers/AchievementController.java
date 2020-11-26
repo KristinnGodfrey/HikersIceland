@@ -2,6 +2,7 @@ package is.hi.g.hikersicelands.hikersicelands.Controllers;
 
 import is.hi.g.hikersicelands.hikersicelands.Entities.Achievement;
 import is.hi.g.hikersicelands.hikersicelands.Entities.Hike;
+import is.hi.g.hikersicelands.hikersicelands.Entities.Profile;
 import is.hi.g.hikersicelands.hikersicelands.Services.AchievementService;
 import is.hi.g.hikersicelands.hikersicelands.Services.HikeService;
 import is.hi.g.hikersicelands.hikersicelands.Services.ReviewService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -36,7 +38,7 @@ public class AchievementController {
         // find the hike
         Hike hike = hikeService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
         // create a new Achievement
-        Achievement saveAchievement = new Achievement(achievement.getName(), achievement.getDescription(), achievement.getDifficulty(), hike);
+        Achievement saveAchievement = new Achievement(achievement.getName(), achievement.getDescription(), achievement.getDifficulty(), hike, false);
         achievementService.save(saveAchievement);
 
         Hike updatedHike = hikeService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
@@ -59,12 +61,18 @@ public class AchievementController {
     }
 
     @RequestMapping(value ="/hike/{hikeid}/achievement/{achievementid}/complete", method = RequestMethod.POST)
-    public String completeAchievement(@PathVariable("hikeid") long hikeid, @PathVariable("achievementid") long id, @Valid Achievement achievement, BindingResult result, Model model){
+    public String completeAchievement(@PathVariable("hikeid") long hikeid, @PathVariable("achievementid") long id, @Valid Achievement achievement, BindingResult result, Model model, HttpSession httpSession){
         if(result.hasErrors()){
             return "welcome";
         }
+        String sessionUsername = (String) httpSession.getAttribute("username");
+        if (sessionUsername == null) {
+            return "welcome";
+        }
 
-        // TODO complete hike for a user
+        achievementService.save(new Achievement(achievement.getName(), achievement.getDescription(), achievement.getDifficulty(), achievement.getHike(), true));
+
+        achievementService.deleteAchievementById(id);
 
         Hike hike = hikeService.findById(hikeid).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
         model.addAttribute("hike", hike);
