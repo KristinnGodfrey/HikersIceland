@@ -36,9 +36,9 @@
                 <td th:text="${item.description}"></td>
                 <td th:text="${item.itemType.displayValue}"></td>
                 <td th:text="${item.image}"></td>
-                <td>
+                <td th:if="${profile}">
 <!--                    DELETE button  -->
-                    <form action="#" th:action="@{/hike/{hikeid}/item/{aid}(hikeid=${hike.id}, aid=${item.id})}" th:method="DELETE" >
+                    <form th:if="${profile.admin}" action="#" th:action="@{/hike/{hikeid}/item/{aid}(hikeid=${hike.id}, aid=${item.id})}" th:method="DELETE" >
                         <input type="hidden" name="_method" value="delete" />
                         <button type="submit" id="submitMountain">Eyða</button>
                     </form>
@@ -111,8 +111,9 @@
         </table>
     </div>
     <!--Add item (mountain, wildlife, flora)-->
-    <h2>add item (mountain, wildlife or flora)</h2>
-    <div>
+    <div th:if="${profile}">
+    <h2 th:if="${profile.admin}">add item (mountain, wildlife or flora)</h2>
+    <div th:if="${profile.admin}">
         <table>
             <tbody>
                 <tr>
@@ -141,6 +142,7 @@
             </tbody>
         </table>
     </div>
+    </div>
 <!-- achivements -->
     <div>
         <h2>Achievements</h2>
@@ -155,8 +157,8 @@
             </thead>
             <tbody>
             <!--Add achievement-->
-            <tr>
-                <form action="#" th:action="@{/hike/{id}/achievement(id=${hike.id})}" th:object="${achievement}" method="post">
+            <tr th:if="${profile}">
+                <form th:if="${profile.admin}" action="#" th:action="@{/hike/{id}/achievement(id=${hike.id})}" th:object="${achievement}" method="post">
                     <td></td>
                     <td><input type="text" th:field="*{name}" id="name" placeholder="Title"></td>
                     <td><textarea class="desc" type="text" th:field="*{description}" id="description" placeholder="Description"></textarea></td>
@@ -175,8 +177,8 @@
                 <td th:text="${achievement.name}"></td>
                 <td th:text="${achievement.description}"></td>
                 <td th:text="${achievement.difficulty}"></td>
-                <td> <!--DELETE button-->
-                    <form action="#" th:action="@{/hike/{hikeid}/achievement/{aid}(hikeid=${hike.id}, aid=${achievement.id})}" th:method="DELETE" >
+                <td th:if="${profile}"> <!--DELETE button-->
+                    <form th:if="${profile}" action="#" th:action="@{/hike/{hikeid}/achievement/{aid}(hikeid=${hike.id}, aid=${achievement.id})}" th:method="DELETE" >
                         <input type="hidden" name="_method" value="delete" />
                         <button type="submit" id="submitButton">Eyða</button>
                     </form>
