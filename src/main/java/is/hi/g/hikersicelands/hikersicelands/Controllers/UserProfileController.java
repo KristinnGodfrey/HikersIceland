@@ -52,10 +52,15 @@ public class UserProfileController {
             return "login";
         }
         // delete old
+        String oldPass = profileService.searchProfileByUsername(profile.getUsername()).getPassword();
         profileService.deleteProfileByUsername(profile.getUsername());
 
+        if(!profile.getPassword().equals("")){
+            // update password if new
+            oldPass = profile.getPassword();
+        }
         // create new
-        Profile newProfile = profileService.saveProfile(new Profile(profile.getUsername(), profile.getPassword(), profile.getName(), profile.getAge(), profile.getAdmin()));
+        Profile newProfile = profileService.saveProfile(new Profile(profile.getUsername(), oldPass, profile.getName(), profile.getAge(), profile.getAdmin()));
 
         model.addAttribute("profile", newProfile);
         model.addAttribute("successMessage", "Updated successfully!");
@@ -89,7 +94,6 @@ public class UserProfileController {
         }
         if (profileService.loginProfile(profile.getUsername(), profile.getPassword())){
             model.addAttribute("hikes", hikeService.findAll());
-            model.addAttribute("profile", profileService.searchProfileByUsername(profile.getUsername()));
             httpSession.setAttribute("username", profile.getUsername());
             return "Welcome";
         }
