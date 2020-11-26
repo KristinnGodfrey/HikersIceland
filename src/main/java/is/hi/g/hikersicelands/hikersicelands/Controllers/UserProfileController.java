@@ -67,9 +67,12 @@ public class UserProfileController {
         if(result.hasErrors()){
             return "signup";
         }
-        profileService.saveProfile(profile);
-        model.addAttribute("hikes", hikeService.findAll());
-        return "Welcome";
+        if (profileService.searchProfileByUsername(profile.getUsername()) == null){
+            profileService.saveProfile(profile);
+            model.addAttribute("hikes", hikeService.findAll());
+            return "Welcome";
+        }
+        return "signup";
     }
 
     @RequestMapping(value="/signup", method = RequestMethod.GET)
