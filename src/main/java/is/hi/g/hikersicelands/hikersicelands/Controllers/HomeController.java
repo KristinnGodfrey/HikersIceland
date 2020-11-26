@@ -80,13 +80,18 @@ public class HomeController {
     }
 
     @RequestMapping("/hike/{id}")
-    public String getHike(@PathVariable("id") long id, Model model){
+    public String getHike(@PathVariable("id") long id, Model model, HttpSession httpSession){
         Hike hike = hikeService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
         model.addAttribute("hike", hike);
         Achievement achievement = new Achievement();
         model.addAttribute("achievement", achievement);
         Item item = new Item();
         model.addAttribute("item", item);
+        String sessionUsername = (String) httpSession.getAttribute("username");
+        if(sessionUsername != null) {
+            Profile sessionProfile = profileService.searchProfileByUsername(sessionUsername);
+            model.addAttribute("profile", sessionProfile);
+        }
         return "Hike";
     }
 
