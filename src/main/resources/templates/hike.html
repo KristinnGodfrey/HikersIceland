@@ -25,8 +25,7 @@
             <tr>
                 <th>Title</th>
                 <th>Description</th>
-                <th>Item Type</th>
-                <th>Image</th>
+                <th>Type</th>
                 <th></th>
             </tr>
             </thead>
@@ -35,7 +34,6 @@
                 <td th:text="${item.name}"></td>
                 <td th:text="${item.description}"></td>
                 <td th:text="${item.itemType.displayValue}"></td>
-                <td th:text="${item.image}"></td>
                 <td>
 <!--                    DELETE button  -->
                     <form action="#" th:action="@{/hike/{hikeid}/item/{aid}(hikeid=${hike.id}, aid=${item.id})}" th:method="DELETE" >
@@ -56,8 +54,7 @@
             <tr>
                 <th>Title</th>
                 <th>Description</th>
-                <th>Item Type</th>
-                <th>Image</th>
+                <th>Type</th>
                 <th></th>
             </tr>
             </thead>
@@ -66,7 +63,6 @@
                 <td th:text="${item.name}"></td>
                 <td th:text="${item.description}"></td>
                 <td th:text="${item.itemType.displayValue}"></td>
-                <td th:text="${item.image}"></td>
                 <td>
                     <!--                    DELETE button-->
                     <form action="#" th:action="@{/hike/{hikeid}/item/{aid}(hikeid=${hike.id}, aid=${item.id})}" th:method="DELETE" >
@@ -87,8 +83,7 @@
 
                 <th>Title</th>
                 <th>Description</th>
-                <th>Item Type</th>
-                <th>Image</th>
+                <th>Type</th>
                 <th></th>
             </tr>
             </thead>
@@ -97,7 +92,6 @@
                 <td th:text="${item.name}"></td>
                 <td th:text="${item.description}"></td>
                 <td th:text="${item.itemType.displayValue}"></td>
-                <td th:text="${item.image}"></td>
                 <td>
                     <!--                    DELETE button-->
                     <form action="#" th:action="@{/hike/{hikeid}/item/{aid}(hikeid=${hike.id}, aid=${item.id})}" th:method="DELETE" >
@@ -116,15 +110,12 @@
         <table>
             <tbody>
                 <tr>
-                    <td></td>
                     <th>Title</th>
                     <th>Description</th>
-                    <th>Item Type</th>
-                    <th>Image</th>
+                    <th>Type</th>
                 </tr>
                 <tr>
                     <form action="#" th:action="@{/hike/{id}/item(id=${hike.id})}" th:object="${item}" method="post">
-                        <td></td>
                         <td><input type="text" th:field="*{name}" id="itemName" placeholder="Title"></td>
                         <td><input type="text" th:field="*{description}" id="itemDescription" placeholder="Description"></td>
                         <td>
@@ -134,7 +125,6 @@
                                 </option>
                             </select>
                         </td>
-                        <td><input type="text" th:field="*{image}" id="image" placeholder="Image"></td>
                         <td><input type="submit" value="Bæta við" /></td>
                     </form>
                 </tr>
