@@ -2,7 +2,11 @@ package is.hi.g.hikersicelands.hikersicelands.Controllers;
 
 import is.hi.g.hikersicelands.hikersicelands.Entities.Achievement;
 import is.hi.g.hikersicelands.hikersicelands.Entities.Hike;
+<<<<<<< HEAD
+import is.hi.g.hikersicelands.hikersicelands.Entities.Item;
+=======
 import is.hi.g.hikersicelands.hikersicelands.Entities.Profile;
+>>>>>>> b5b98682b22904dc3442a8544e768a6d9e38e362
 import is.hi.g.hikersicelands.hikersicelands.Services.AchievementService;
 import is.hi.g.hikersicelands.hikersicelands.Services.HikeService;
 import is.hi.g.hikersicelands.hikersicelands.Services.ReviewService;
@@ -44,6 +48,7 @@ public class AchievementController {
         Hike updatedHike = hikeService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
         model.addAttribute("hike", updatedHike);
         model.addAttribute("achievement", new Achievement());
+        model.addAttribute("item", new Item());
         return "hike";
     }
 
@@ -57,6 +62,7 @@ public class AchievementController {
         Hike hike = hikeService.findById(hikeid).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
         model.addAttribute("hike", hike);
         model.addAttribute("achievement", new Achievement());
+        model.addAttribute("item", new Item());
         return "Hike";
     }
 
@@ -80,6 +86,7 @@ public class AchievementController {
         Hike hike = hikeService.findById(hikeid).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
         model.addAttribute("hike", hike);
         model.addAttribute("achievement", new Achievement());
+        model.addAttribute("item", new Item());
         return "Hike";
     }
 
