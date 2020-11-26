@@ -74,4 +74,12 @@ public class Achievement {
     public void setHike(Hike hike) {
         this.hike = hike;
     }
+
+    public Boolean getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
+    }
 }
