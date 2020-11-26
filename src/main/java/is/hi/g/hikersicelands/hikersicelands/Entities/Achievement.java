@@ -2,6 +2,7 @@ package is.hi.g.hikersicelands.hikersicelands.Entities;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Achievement {
@@ -15,8 +16,13 @@ public class Achievement {
     @ManyToOne
     private Hike hike;
 
+
+    private Boolean completed;
+
+
     // Smiður
-    public Achievement(String name, String description, int difficulty, Hike hike) {
+    public Achievement(String name, String description, int difficulty, Hike hike, Boolean completed) {
+        this.completed = completed;
         this.name = name;
         this.description = description;
         this.difficulty = difficulty;
