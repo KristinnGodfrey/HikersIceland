@@ -1,11 +1,12 @@
 :root {
-  --main-bg-color: #EDF5E1;
-  --2nd-bg-color: #05386B;
-  --3rd-bg-color; #5CBD95;
+  --main-bg-color: #EDF5E1; /* Hvítur */
+  --2nd-bg-color: #05386B; /*Blár */
+  --3rd-bg-color; #5CBD95; /*Grænn */
 }
 body {
 background-color: #5CBD95 !important;
 color: var(--main-bg-color);
+font-size: 24px;
 }
 table {
     border: 2px solid var(--main-bg-color);
@@ -25,11 +26,34 @@ table td {
 }
 textarea.desc{
      text-algin: left;
-     width:980px;
+     border:0.1em solid #EDF5E1;
+     width:990px;
      height:150px;
      overflow-x: auto;
+     color: var(--main-bg-color);
+     background-color:var(--3rd-bg-color);
+     resize: none;
 }
-add.input{
+textarea.desc:focus, input:focus{
+    outline: none;
+}
+input{
+    display:inline-block;
+    padding:0.35em 1.2em;
+    border:0.1em solid #EDF5E1;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.12em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:#EDF5E1;
+    text-align:center;
+    transition: all 0.2s;
+    background-color: #05386B;
+}
+
+.add{
     display:inline-block;
     padding:0.35em 1.2em;
     border:0.1em solid #FFFFFF;
@@ -37,59 +61,68 @@ add.input{
     border-radius:0.12em;
     box-sizing: border-box;
     text-decoration:none;
-    font-family:'Roboto',sans-serif;
-    font-weight:300;
-    color:#FFFFFF;
+    color:#EDF5E1;
     text-align:center;
     transition: all 0.2s;
+    background-color:#5CBD95;
 }
-add.input:hover{
-    color:#000000;
-    background-color:#FFFFFF;
+.add:hover{
+    color:#EDF5E1;
+    background-color:#05386B;
 }
 
 button{
     display:inline-block;
     padding:0.35em 1.2em;
-    border:0.1em solid #FFFFFF;
+    border:0.1em solid #EDF5E1;
     margin:0 0.3em 0.3em 0;
     border-radius:0.12em;
     box-sizing: border-box;
     text-decoration:none;
     font-family:'Roboto',sans-serif;
     font-weight:300;
-    color:#FFFFFF;
+    color:var(--main-bg-color);
     text-align:center;
     transition: all 0.2s;
+    background-color:#5CBD95;
 }
 
 button:hover{
-    color:#000000;
-    background-color:#FFFFFF;
+    color:var(--main-bg-color);
+    background-color:var(--2nd-bg-color);
 }
 a:link {
-  color: red;
+  color: var(--main-bg-color);
   text-decoration: none;
   appearance: button;
+  background-color: #5CBD95;
+  padding: 2px;
 }
 
 /* visited link */
 a:visited {
-  color: green;
+  color: var(--main-bg-color);
   text-decoration: none;
   appearance: button;
 }
 
 /* mouse over link */
 a:hover {
-  color: hotpink;
+  color: var(--2nd-bg-color);
   text-decoration: none;
   appearance: button;
 }
 
 /* selected link */
 a:active {
-  color: blue;
+  color: var(--main-bg-color);
   text-decoration: none;
   appearance: button;
+}
+
+h2 {
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    color: #EDF5E1;
 }

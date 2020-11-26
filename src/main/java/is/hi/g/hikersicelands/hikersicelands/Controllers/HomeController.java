@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -54,11 +55,12 @@ public class HomeController {
         }
         hikeService.save(hike);
         model.addAttribute("hikes", hikeService.findAll());
-        return "Welcome";
+        return "add-hike";
     }
 
     @RequestMapping(value="/addhike", method = RequestMethod.GET)
-    public String addHikeForm(Hike hike){
+    public String addHikeForm(Hike hike, Model model){
+        model.addAttribute("hikes", hikeService.findAll());
         return "add-hike";
     }
 
@@ -70,7 +72,15 @@ public class HomeController {
         model.addAttribute("achievement", achievement);
         return "Hike";
     }
-
+    @RequestMapping(value ="/addhike/{hikeid}", method = RequestMethod.POST)
+    public String deleteHike(@PathVariable("hikeid") long hikeid, @Valid Hike hike, BindingResult result, Model model){
+        if(result.hasErrors()){
+            return "welcome";
+        }
+        hikeService.deleteHikeById(hikeid);
+        model.addAttribute("hikes", hikeService.findAll());
+        return "add-hike";
+    }
 
 
 }
