@@ -19,6 +19,9 @@
     <label for="age">age</label>
     <input type="text" th:field="*{age}" id="age" placeholder="age">
     <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+    <label for="admin">admin</label>
+    <input type="text" th:field="*{admin}" id="admin" placeholder="admin">
+    <span th:if="${#fields.hasErrors('age')}" th:errors="*{admin}"></span>
     <input type="submit" value="Signup">
 </form>
 </body>

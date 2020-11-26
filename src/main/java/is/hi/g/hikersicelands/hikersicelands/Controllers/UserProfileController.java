@@ -27,7 +27,7 @@ public class UserProfileController {
         this.hikeService = hikeService;
     }
 
-    @RequestMapping("/myprofile")
+    @RequestMapping(value = "/myprofile", method = RequestMethod.GET)
     public String myProfile(Model model, HttpSession httpSession) {
         // Get logged in username from session
         String sessionUsername = (String) httpSession.getAttribute("username");
@@ -79,18 +79,16 @@ public class UserProfileController {
     }
 
     @RequestMapping(value="/login", method = RequestMethod.POST)
-    public String login(@Valid Profile profile, BindingResult result, Model model){
+    public String login(@Valid Profile profile, BindingResult result, Model model, HttpSession httpSession){
         if(result.hasErrors() | profile.getUsername().equals(null) | profile.getPassword().equals(null)){
             return "login";
         }
         if (profileService.loginProfile(profile.getUsername(), profile.getPassword())){
             model.addAttribute("hikes", hikeService.findAll());
+            httpSession.setAttribute("username", profile.getUsername());
             return "Welcome";
         }
         else return "login";
-
-
-
     }
 
     @RequestMapping(value="/login", method = RequestMethod.GET)
