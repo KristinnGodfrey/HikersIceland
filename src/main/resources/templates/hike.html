@@ -17,7 +17,130 @@
         <a th:href="@{/hike/{id}/reviews(id=${hike.id})}">View reviews</a>
     </div>
 
+<!--  mountain -->
+    <div>
+        <h2>mountains</h2>
+        <table>
+            <thead>
+            <tr>
+                <td></td>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Item Type</th>
+                <th>Image</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${item.itemType == T(is.hi.g.hikersicelands.hikersicelands.Entities.ItemType).MOUNTAIN}" th:each="item : ${hike.items}">
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.description}"></td>
+                <td th:text="${item.itemType.displayValue}"></td>
+                <td th:text="${item.image}"></td>
+                <td>
+<!--                    DELETE button  -->
+                    <form action="#" th:action="@{/hike/{hikeid}/item/{aid}(hikeid=${hike.id}, aid=${item.id})}" th:method="DELETE" >
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit" id="submitMountain">Eyða</button>
+                    </form>
+                </td>
+            </tr>
 
+            </tbody>
+        </table>
+    </div>
+<!--wildlife -->
+    <div>
+        <h2>wildlife</h2>
+        <table>
+            <thead>
+            <tr>
+                <td></td>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Item Type</th>
+                <th>Image</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${item.itemType == T(is.hi.g.hikersicelands.hikersicelands.Entities.ItemType).WILDLIFE}" th:each="item : ${hike.items}">
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.description}"></td>
+                <td th:text="${item.itemType.displayValue}"></td>
+                <td th:text="${item.image}"></td>
+                <td>
+                    <!--                    DELETE button-->
+                    <form action="#" th:action="@{/hike/{hikeid}/item/{aid}(hikeid=${hike.id}, aid=${item.id})}" th:method="DELETE" >
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit" id="submitWildlife">Eyða</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+<!-- flora -->
+    <div>
+        <h2>flora</h2>
+        <table>
+            <thead>
+            <tr>
+                <td></td>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Item Type</th>
+                <th>Image</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${item.itemType == T(is.hi.g.hikersicelands.hikersicelands.Entities.ItemType).FLORA}" th:each="item : ${hike.items}">
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.description}"></td>
+                <td th:text="${item.itemType.displayValue}"></td>
+                <td th:text="${item.image}"></td>
+                <td>
+                    <!--                    DELETE button-->
+                    <form action="#" th:action="@{/hike/{hikeid}/item/{aid}(hikeid=${hike.id}, aid=${item.id})}" th:method="DELETE" >
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit" id="submitFlora">Eyða</button>
+                    </form>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <!--Add item (mountain, wildlife, flora)-->
+    <h2>add item (mountain, wildlife or flora)</h2>
+    <div>
+        <table>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Item Type</th>
+                    <th>Image</th>
+                </tr>
+                <tr>
+                    <form action="#" th:action="@{/hike/{id}/item(id=${hike.id})}" th:object="${item}" method="post">
+                        <td></td>
+                        <td><input type="text" th:field="*{name}" id="itemName" placeholder="Title"></td>
+                        <td><input type="text" th:field="*{description}" id="itemDescription" placeholder="Description"></td>
+                        <td>
+                            <select name="itemType">
+                                <option th:each="itemType : ${T(is.hi.g.hikersicelands.hikersicelands.Entities.ItemType).values()}"
+                                        th:value="${itemType}" th:text="${itemType.displayValue}">
+                                </option>
+                            </select>
+                        </td>
+                        <td><input type="text" th:field="*{image}" id="image" placeholder="Image"></td>
+                        <td><input type="submit" value="Bæta við" /></td>
+                    </form>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<!-- achivements -->
     <div>
         <h2>Achievements</h2>
         <table>
@@ -43,7 +166,7 @@
             <tr th:each="achievement : ${hike.achievements}">
 
                 <td> <!--COMPLETE button-->
-                    <form action="#" th:action="@{/hike/{hikeid}/achievement/{aid}/complete(hikeid=${hike.id}, aid=${achievement.id})}" th:method="PATCH" >
+                    <form th:if = (achievement.completed)  action="#" th:action="@{/hike/{hikeid}/achievement/{aid}/complete(hikeid=${hike.id}, aid=${achievement.id})}" th:method="PATCH" >
                         <input type="hidden" name="_method" value="complete" />
                         <button type="submit" id="completeButton">✔</button>
                     </form>
@@ -58,27 +181,8 @@
                     </form>
                 </td>
             </tr>
-
             </tbody>
         </table>
-
-<!--        <form action="#" th:action="@{/hike/{id}/achievement(id=${hike.id})}" th:object="${achievement}" method="post">-->
-<!--            <h3>Add achievements</h3>-->
-<!--            <table>-->
-<!--                <tr>-->
-<!--&lt;!&ndash;                    <th>Title</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <td><input type="text" th:field="*{name}" id="name" placeholder="Name"></td>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <th>Description</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <td><input type="text" th:field="*{description}" id="description" placeholder="Description"></td>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <th>Difficulty</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <td><input type="number" th:field="*{difficulty}" id="difficulty" placeholder="Difficulty"></td>                </tr>&ndash;&gt;-->
-
-<!--                <tr>-->
-<!--                    <td><input type="submit" value="Submit" /></td>-->
-<!--                </tr>-->
-<!--            </table>-->
-<!--        </form>-->
-
     </div>
 </div>
 </body>

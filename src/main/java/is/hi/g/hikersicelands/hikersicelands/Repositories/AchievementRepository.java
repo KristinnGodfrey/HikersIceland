@@ -14,4 +14,5 @@ public interface AchievementRepository extends JpaRepository<Achievement, Long> 
     void deleteAchievementById(Long id); // aðferð til að eyða
     List<Achievement> findAchievementsByHikeId(Long hikeId); // aðferð til að fá lista af Achievements út frá HikeID
     Achievement findAchievementById(Long id); // aðferð til að sækja ákveðið Achievement
+
 }
