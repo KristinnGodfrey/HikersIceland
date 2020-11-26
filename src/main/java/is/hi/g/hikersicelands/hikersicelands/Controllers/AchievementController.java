@@ -6,6 +6,7 @@ import is.hi.g.hikersicelands.hikersicelands.Entities.Item;
 import is.hi.g.hikersicelands.hikersicelands.Entities.Profile;
 import is.hi.g.hikersicelands.hikersicelands.Services.AchievementService;
 import is.hi.g.hikersicelands.hikersicelands.Services.HikeService;
+import is.hi.g.hikersicelands.hikersicelands.Services.ProfileService;
 import is.hi.g.hikersicelands.hikersicelands.Services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,15 +25,17 @@ public class AchievementController {
 
     private HikeService hikeService;
     private AchievementService achievementService;
+    private ProfileService profileService;
 
     @Autowired
-    public AchievementController(HikeService hikeService, AchievementService achievementService){
+    public AchievementController(HikeService hikeService, AchievementService achievementService, ProfileService profileService){
         this.hikeService = hikeService;
         this.achievementService = achievementService;
+        this.profileService = profileService;
     }
 
     @RequestMapping(value ="/hike/{id}/achievement", method = RequestMethod.POST)
-    public String addAchievement(@PathVariable("id") long id, @Valid Achievement achievement, BindingResult result, Model model){
+    public String addAchievement(@PathVariable("id") long id, @Valid Achievement achievement, BindingResult result, Model model, HttpSession httpSession){
         if(result.hasErrors()){
             return "welcome";
         }
@@ -46,11 +49,17 @@ public class AchievementController {
         model.addAttribute("hike", updatedHike);
         model.addAttribute("achievement", new Achievement());
         model.addAttribute("item", new Item());
+
+        String sessionUsername = (String) httpSession.getAttribute("username");
+        if(sessionUsername != null) {
+            Profile sessionProfile = profileService.searchProfileByUsername(sessionUsername);
+            model.addAttribute("profile", sessionProfile);
+        }
         return "hike";
     }
 
     @RequestMapping(value ="/hike/{hikeid}/achievement/{achievementid}", method = RequestMethod.POST)
-    public String deleteAchievement(@PathVariable("hikeid") long hikeid, @PathVariable("achievementid") long id, @Valid Achievement achievement, BindingResult result, Model model){
+    public String deleteAchievement(@PathVariable("hikeid") long hikeid, @PathVariable("achievementid") long id, @Valid Achievement achievement, BindingResult result, Model model, HttpSession httpSession){
         if(result.hasErrors()){
             return "welcome";
         }
@@ -60,6 +69,11 @@ public class AchievementController {
         model.addAttribute("hike", hike);
         model.addAttribute("achievement", new Achievement());
         model.addAttribute("item", new Item());
+        String sessionUsername = (String) httpSession.getAttribute("username");
+        if(sessionUsername != null) {
+            Profile sessionProfile = profileService.searchProfileByUsername(sessionUsername);
+            model.addAttribute("profile", sessionProfile);
+        }
         return "Hike";
     }
 
@@ -84,6 +98,11 @@ public class AchievementController {
         model.addAttribute("hike", hike);
         model.addAttribute("achievement", new Achievement());
         model.addAttribute("item", new Item());
+
+        if(sessionUsername != null) {
+            Profile sessionProfile = profileService.searchProfileByUsername(sessionUsername);
+            model.addAttribute("profile", sessionProfile);
+        }
         return "Hike";
     }
 
