@@ -1,11 +1,8 @@
 package is.hi.g.hikersicelands.hikersicelands.Controllers;
 
-import is.hi.g.hikersicelands.hikersicelands.Entities.Achievement;
-import is.hi.g.hikersicelands.hikersicelands.Entities.Hike;
-import is.hi.g.hikersicelands.hikersicelands.Entities.Item;
-import is.hi.g.hikersicelands.hikersicelands.Entities.Profile;
+import is.hi.g.hikersicelands.hikersicelands.Entities.*;
 import is.hi.g.hikersicelands.hikersicelands.Services.HikeService;
-import is.hi.g.hikersicelands.hikersicelands.Entities.Review;
+import is.hi.g.hikersicelands.hikersicelands.Services.ItemService;
 import is.hi.g.hikersicelands.hikersicelands.Services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,6 +23,7 @@ import java.util.List;
 public class HomeController {
 
     private HikeService hikeService;
+    private ItemService itemService;
     private ReviewService reviewService;
 
     @Autowired
@@ -85,4 +85,16 @@ public class HomeController {
         model.addAttribute("hikes", hikeService.findAll());
         return "add-hike";
     }
+
+//    @PostConstruct
+//    public void init() {
+//        List<Achievement> achievements = new ArrayList<Achievement>();
+//        Hike hikeObject = new Hike(1, "coolhike", "fun","loccc","imgg", achievements);
+//
+//
+//
+//        Item itemObject = new Item("nasdasdame", "descasdasdaription", ItemType.MOUNTAIN, "imadsasdage", hikeObject);
+//        itemService.save(itemObject);
+//        hikeService.save(hikeObject);
+//    }
 }

@@ -32,13 +32,6 @@
             </thead>
             <tbody>
             <tr th:if="${item.itemType == T(is.hi.g.hikersicelands.hikersicelands.Entities.ItemType).MOUNTAIN}" th:each="item : ${hike.items}">
-                <td> <!--COMPLETE button-->
-                    <form action="#" th:action="@{/hike/{hikeid}/item/{aid}/complete(hikeid=${hike.id}, aid=${item.id})}" th:method="PATCH" >
-                        <input type="hidden" name="_method" value="complete" />
-                        <button type="submit" id="completeItem">✔</button>
-                    </form>
-                </td>
-
                 <td th:text="${item.name}"></td>
                 <td th:text="${item.description}"></td>
                 <td th:text="${item.itemType.displayValue}"></td>
@@ -47,7 +40,7 @@
 <!--                    DELETE button  -->
                     <form action="#" th:action="@{/hike/{hikeid}/item/{aid}(hikeid=${hike.id}, aid=${item.id})}" th:method="DELETE" >
                         <input type="hidden" name="_method" value="delete" />
-                        <button type="submit" id="submitItem">Eyða</button>
+                        <button type="submit" id="submitMountain">Eyða</button>
                     </form>
                 </td>
             </tr>
@@ -70,12 +63,6 @@
             </thead>
             <tbody>
             <tr th:if="${item.itemType == T(is.hi.g.hikersicelands.hikersicelands.Entities.ItemType).WILDLIFE}" th:each="item : ${hike.items}">
-                <td> <!--COMPLETE button-->
-                    <form action="#" th:action="@{/hike/{hikeid}/item/{aid}/complete(hikeid=${hike.id}, aid=${item.id})}" th:method="PATCH" >
-                        <input type="hidden" name="_method" value="complete" />
-                        <button type="submit" id="completeItem">✔</button>
-                    </form>
-                </td>
                 <td th:text="${item.name}"></td>
                 <td th:text="${item.description}"></td>
                 <td th:text="${item.itemType.displayValue}"></td>
@@ -84,7 +71,7 @@
                     <!--                    DELETE button-->
                     <form action="#" th:action="@{/hike/{hikeid}/item/{aid}(hikeid=${hike.id}, aid=${item.id})}" th:method="DELETE" >
                         <input type="hidden" name="_method" value="delete" />
-                        <button type="submit" id="submitItem">Eyða</button>
+                        <button type="submit" id="submitWildlife">Eyða</button>
                     </form>
                 </td>
             </tr>
@@ -106,15 +93,6 @@
             </thead>
             <tbody>
             <tr th:if="${item.itemType == T(is.hi.g.hikersicelands.hikersicelands.Entities.ItemType).FLORA}" th:each="item : ${hike.items}">
-                <td> <!--COMPLETE button-->
-<!--                    <th:block th:each="planet : ${T(com.frontbackend.thymeleaf.enums.model.Planet).values()}">-->
-<!--                        <span th:if="${planet.name() == 'EARTH'}" th:text="${planet + ' = our home'}"></span>-->
-<!--                    </th:block>-->
-                    <form action="#" th:action="@{/hike/{hikeid}/item/{aid}/complete(hikeid=${hike.id}, aid=${item.id})}" th:method="PATCH" >
-                        <input type="hidden" name="_method" value="complete" />
-                        <button type="submit" id="completeItem">✔</button>
-                    </form>
-                </td>
                 <td th:text="${item.name}"></td>
                 <td th:text="${item.description}"></td>
                 <td th:text="${item.itemType.displayValue}"></td>
@@ -123,7 +101,7 @@
                     <!--                    DELETE button-->
                     <form action="#" th:action="@{/hike/{hikeid}/item/{aid}(hikeid=${hike.id}, aid=${item.id})}" th:method="DELETE" >
                         <input type="hidden" name="_method" value="delete" />
-                        <button type="submit" id="submitItem">Eyða</button>
+                        <button type="submit" id="submitFlora">Eyða</button>
                     </form>
                 </td>
             </tr>
