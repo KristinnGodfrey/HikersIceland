@@ -2,11 +2,8 @@ package is.hi.g.hikersicelands.hikersicelands.Controllers;
 
 import is.hi.g.hikersicelands.hikersicelands.Entities.Achievement;
 import is.hi.g.hikersicelands.hikersicelands.Entities.Hike;
-<<<<<<< HEAD
 import is.hi.g.hikersicelands.hikersicelands.Entities.Item;
-=======
 import is.hi.g.hikersicelands.hikersicelands.Entities.Profile;
->>>>>>> b5b98682b22904dc3442a8544e768a6d9e38e362
 import is.hi.g.hikersicelands.hikersicelands.Services.AchievementService;
 import is.hi.g.hikersicelands.hikersicelands.Services.HikeService;
 import is.hi.g.hikersicelands.hikersicelands.Services.ReviewService;
