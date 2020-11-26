@@ -8,22 +8,37 @@
 <body>
 <a th:href="@{/}">Back</a>
 <form action="#" th:action="@{/signup}" th:object="${profile}" method="post">
+    <fieldset>
+        <p>
     <label for="username">Username</label>
-    <input type="text" th:field="*{username}" id="username" paceholder="name">
+    <input type="text" th:field="*{username}" id="username" placeholder="name">
     <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
-    <label for="password">password</label>
+        </p>
+        <p>
+    <label for="password">Password</label>
     <input type="password" th:field="*{password}" id="password" placeholder="password">
     <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+        </p>
+        <p>
     <label for="name">Name</label>
     <input type="text" th:field="*{name}" id="name" placeholder="name">
     <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-    <label for="age">age</label>
+        </p>
+        <p>
+    <label for="age">Age</label>
     <input type="text" th:field="*{age}" id="age" placeholder="age">
     <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
-    <label for="admin">admin</label>
+        </p>
+        <p>
+    <label for="admin">Admin</label>
     <input type="text" th:field="*{admin}" id="admin" placeholder="admin">
     <span th:if="${#fields.hasErrors('age')}" th:errors="*{admin}"></span>
+        </p>
+        <p>
     <input type="submit" value="Signup">
+        </p>
+
+    </fieldset>
 </form>
 </body>
 </html>
