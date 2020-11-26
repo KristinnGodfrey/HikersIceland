@@ -69,6 +69,7 @@ public class UserProfileController {
         }
         profileService.saveProfile(profile);
         model.addAttribute("hikes", hikeService.findAll());
+        model.addAttribute("username", null);
         return "Welcome";
     }
 
@@ -85,6 +86,7 @@ public class UserProfileController {
         }
         if (profileService.loginProfile(profile.getUsername(), profile.getPassword())){
             model.addAttribute("hikes", hikeService.findAll());
+            model.addAttribute("profile", profileService.searchProfileByUsername(profile.getUsername()));
             httpSession.setAttribute("username", profile.getUsername());
             return "Welcome";
         }
