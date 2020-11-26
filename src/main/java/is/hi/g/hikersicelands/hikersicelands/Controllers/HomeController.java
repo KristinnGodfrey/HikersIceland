@@ -2,12 +2,9 @@ package is.hi.g.hikersicelands.hikersicelands.Controllers;
 
 import is.hi.g.hikersicelands.hikersicelands.Entities.*;
 import is.hi.g.hikersicelands.hikersicelands.Services.HikeService;
-<<<<<<< HEAD
 import is.hi.g.hikersicelands.hikersicelands.Services.ItemService;
-=======
 import is.hi.g.hikersicelands.hikersicelands.Entities.Review;
 import is.hi.g.hikersicelands.hikersicelands.Services.ProfileService;
->>>>>>> f8af64d73a2d1006bfb7cbb9f9c45d1ad0a7eb18
 import is.hi.g.hikersicelands.hikersicelands.Services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

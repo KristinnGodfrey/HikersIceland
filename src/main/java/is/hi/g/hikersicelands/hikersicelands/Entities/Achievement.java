@@ -31,7 +31,6 @@ public class Achievement {
 
     // Tómur smiður
     public Achievement() {
-
     }
 
     // Getters og setters
