@@ -2,48 +2,44 @@ package is.hi.g.hikersicelands.hikersicelands.Controllers;
 
 import is.hi.g.hikersicelands.hikersicelands.Entities.Achievement;
 import is.hi.g.hikersicelands.hikersicelands.Entities.Hike;
-<<<<<<< HEAD
 import is.hi.g.hikersicelands.hikersicelands.Entities.Item;
-=======
-import is.hi.g.hikersicelands.hikersicelands.Entities.Profile;
->>>>>>> b5b98682b22904dc3442a8544e768a6d9e38e362
 import is.hi.g.hikersicelands.hikersicelands.Services.AchievementService;
 import is.hi.g.hikersicelands.hikersicelands.Services.HikeService;
-import is.hi.g.hikersicelands.hikersicelands.Services.ReviewService;
+import is.hi.g.hikersicelands.hikersicelands.Services.ItemService;
+import javafx.application.Application;
+import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
-public class AchievementController {
+public class ItemController {
 
     private HikeService hikeService;
-    private AchievementService achievementService;
+    private ItemService itemService;
 
     @Autowired
-    public AchievementController(HikeService hikeService, AchievementService achievementService){
+    public ItemController(HikeService hikeService, ItemService itemService){
         this.hikeService = hikeService;
-        this.achievementService = achievementService;
+        this.itemService = itemService;
     }
 
-    @RequestMapping(value ="/hike/{id}/achievement", method = RequestMethod.POST)
-    public String addAchievement(@PathVariable("id") long id, @Valid Achievement achievement, BindingResult result, Model model){
+    @RequestMapping(value ="/hike/{id}/item", method = RequestMethod.POST)
+    public String additem(@PathVariable("id") long id, @Valid Item item, BindingResult result, Model model){
         if(result.hasErrors()){
             return "welcome";
         }
         // find the hike
         Hike hike = hikeService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
-        // create a new Achievement
-        Achievement saveAchievement = new Achievement(achievement.getName(), achievement.getDescription(), achievement.getDifficulty(), hike, false);
-        achievementService.save(saveAchievement);
+        // create a new item
+        Item saveItem = new Item(item.getName(), item.getDescription(), item.getItemType(), item.getImage(), hike);
+        itemService.save(saveItem);
 
         Hike updatedHike = hikeService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
         model.addAttribute("hike", updatedHike);
@@ -52,13 +48,13 @@ public class AchievementController {
         return "hike";
     }
 
-    @RequestMapping(value ="/hike/{hikeid}/achievement/{achievementid}", method = RequestMethod.POST)
-    public String deleteAchievement(@PathVariable("hikeid") long hikeid, @PathVariable("achievementid") long id, @Valid Achievement achievement, BindingResult result, Model model){
+    @RequestMapping(value ="/hike/{hikeid}/item/{itemid}", method = RequestMethod.POST)
+    public String deleteitem(@PathVariable("hikeid") long hikeid, @PathVariable("itemid") long id, @Valid Item item, BindingResult result, Model model){
         if(result.hasErrors()){
             return "welcome";
         }
 
-        achievementService.deleteAchievementById(id);
+        itemService.deleteItemById(id);
         Hike hike = hikeService.findById(hikeid).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
         model.addAttribute("hike", hike);
         model.addAttribute("achievement", new Achievement());
@@ -66,19 +62,13 @@ public class AchievementController {
         return "Hike";
     }
 
-    @RequestMapping(value ="/hike/{hikeid}/achievement/{achievementid}/complete", method = RequestMethod.POST)
-    public String completeAchievement(@PathVariable("hikeid") long hikeid, @PathVariable("achievementid") long id, @Valid Achievement achievement, BindingResult result, Model model, HttpSession httpSession){
+    @RequestMapping(value ="/hike/{hikeid}/item/{itemid}/complete", method = RequestMethod.POST)
+    public String completeitem(@PathVariable("hikeid") long hikeid, @PathVariable("itemid") long id, @Valid Item item, BindingResult result, Model model){
         if(result.hasErrors()){
             return "welcome";
         }
-        String sessionUsername = (String) httpSession.getAttribute("username");
-        if (sessionUsername == null) {
-            return "welcome";
-        }
 
-        achievementService.save(new Achievement(achievement.getName(), achievement.getDescription(), achievement.getDifficulty(), achievement.getHike(), true));
-
-        achievementService.deleteAchievementById(id);
+        // TODO complete hike for a user
 
         Hike hike = hikeService.findById(hikeid).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
         model.addAttribute("hike", hike);
@@ -87,8 +77,8 @@ public class AchievementController {
         return "Hike";
     }
 
-    @RequestMapping(value="/hike/{id]/achievement", method = RequestMethod.GET)
-    public String addAchievementForm(Hike hike){
+    @RequestMapping(value="/hike/{id]/item", method = RequestMethod.GET)
+    public String additemForm(Hike hike){
         return "welcome";
     }
 

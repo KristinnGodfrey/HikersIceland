@@ -1,9 +1,6 @@
 package is.hi.g.hikersicelands.hikersicelands.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 
 @Entity
 public class Profile {
@@ -18,6 +15,9 @@ public class Profile {
     private String name;
     private int age;
     private boolean admin;
+
+    @OneToOne
+    private Achievement achievement;
 
     // Tómur smiður
     public Profile(){
@@ -57,4 +57,16 @@ public class Profile {
     public boolean getAdmin() {return admin;}
 
     public void setAdmin(boolean priv) {this.admin = priv;}
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public Achievement getAchievement() {
+        return achievement;
+    }
+
+    public void setAchievement(Achievement achievement) {
+        this.achievement = achievement;
+    }
 }

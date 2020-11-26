@@ -19,12 +19,23 @@
             </tr>
             </thead>
             <tbody>
+<<<<<<< HEAD
+                <tr th:each="hike : ${hikes}">
+                    <td th:text="${hike.name}"></td>
+                    <td th:text="${hike.description}"></td>
+                    <td th:text="${hike.location}"></td>
+                    <td th:text="${hike.image}"></td>
+                    <td th:text="${hike.id}"></td>
+                    <td><a th:href="@{/hike/{id}/(id=${hike.id})}">View</a></td>
+                </tr>
+=======
             <tr th:each="hike : ${hikes}">
                 <td th:text="${hike.name}"></td>
                 <td th:text="${hike.description}"></td>
                 <td th:text="${hike.location}"></td>
                 <td><a th:href="@{/hike/{id}/(id=${hike.id})}">View</a></td>
             </tr>
+>>>>>>> 86f00c1446b393541357c2ba34286a1d2625d297
             </tbody>
         </table>
     </div>
