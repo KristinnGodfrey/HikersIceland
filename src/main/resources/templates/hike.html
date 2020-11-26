@@ -166,7 +166,7 @@
             <tr th:each="achievement : ${hike.achievements}">
 
                 <td> <!--COMPLETE button-->
-                    <form action="#" th:action="@{/hike/{hikeid}/achievement/{aid}/complete(hikeid=${hike.id}, aid=${achievement.id})}" th:method="PATCH" >
+                    <form th:if = (achievement.completed)  action="#" th:action="@{/hike/{hikeid}/achievement/{aid}/complete(hikeid=${hike.id}, aid=${achievement.id})}" th:method="PATCH" >
                         <input type="hidden" name="_method" value="complete" />
                         <button type="submit" id="completeButton">✔</button>
                     </form>
