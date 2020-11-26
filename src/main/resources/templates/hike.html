@@ -6,8 +6,8 @@
     <link rel="stylesheet" th:href="@{/css/mainstyle.css}"/>
 </head>
 <body>
+<a th:href="@{/}">Back</a>
 <div>
-    <a th:href="@{/}">Back</a>
     <div class="hike-info">
         <div clasS="hike-details">
             <h1 class="hike-name" th:utext="${hike.name}"></h1>
@@ -168,7 +168,7 @@
         <table>
             <thead>
                 <tr>
-                    <td></td>
+                    <th>Complete</th>
                     <th>Title</th>
                     <th>Description</th>
                     <th>Difficulty</th>
@@ -180,9 +180,9 @@
                 <form action="#" th:action="@{/hike/{id}/achievement(id=${hike.id})}" th:object="${achievement}" method="post">
                     <td></td>
                     <td><input type="text" th:field="*{name}" id="name" placeholder="Title"></td>
-                    <td><input type="text" th:field="*{description}" id="description" placeholder="Description"></td>
+                    <td><textarea class="desc" type="text" th:field="*{description}" id="description" placeholder="Description"></textarea></td>
                     <td><input type="number" min="0" max="5" th:field="*{difficulty}" id="difficulty" placeholder="Difficulty"></td>
-                    <td><input type="submit" value="Bæta við" /></td>
+                    <td><input class = "add" type="submit" value="Bæta við" /></td>
                 </form>
             </tr>
             <tr th:each="achievement : ${hike.achievements}">
