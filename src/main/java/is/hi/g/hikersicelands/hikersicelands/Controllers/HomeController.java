@@ -69,6 +69,7 @@ public class HomeController {
         }
         hikeService.save(hike);
         model.addAttribute("hikes", hikeService.findAll());
+        model.addAttribute("hike", new Hike());
         return "add-hike";
     }
 
