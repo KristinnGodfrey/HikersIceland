@@ -28,7 +28,9 @@
             </tbody>
         </table>
     </div>
-    <p><a href="/addhike">Add a new hike</a></p>
+    <div th:if="${profile}">
+     <p th:if="${profile.admin}"><a href="/addhike">Add a new hike</a></p>
+    </div>
     <p><a href="/signup"> Signup</a></p>
     <p><a href="/login"> Login</a></p>
     <p><a href="/myprofile"> My profile</a></p>
