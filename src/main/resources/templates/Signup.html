@@ -6,12 +6,13 @@
     <title>Velkomin á signup síðuna</title>
 </head>
 <body>
+<a th:href="@{/}">Back</a>
 <form action="#" th:action="@{/signup}" th:object="${profile}" method="post">
     <label for="username">Username</label>
     <input type="text" th:field="*{username}" id="username" paceholder="name">
     <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
     <label for="password">password</label>
-    <input type="text" th:field="*{password}" id="password" placeholder="password">
+    <input type="password" th:field="*{password}" id="password" placeholder="password">
     <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
     <label for="name">Name</label>
     <input type="text" th:field="*{name}" id="name" placeholder="name">

@@ -31,7 +31,7 @@ public class ProfileServiceImplementation implements ProfileService {
     // Búa til profile
     @Override
     public Profile saveProfile(Profile profile){
-        return repository.save(profile);
+            return repository.save(profile);
     }
 
     // Setja profile á eða af private mode
