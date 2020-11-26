@@ -9,13 +9,21 @@
 <a th:href="@{/}">Back</a>
 <p> Velkomin á login síðuna </p>
 <form action="#" th:action="@{/login}" th:object="${profile}" method="post">
-    <label for="username">Username</label>
-    <input type="text" th:field="*{username}" id="username" paceholder="name">
-    <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
-    <label for="password">password</label>
-    <input type="password" th:field="*{password}" id="password" placeholder="password">
-    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-    <input type="submit" value="Login">
+    <fieldset>
+        <p>
+            <label for="username">Username</label>
+            <input type="text" th:field="*{username}" id="username" paceholder="name">
+            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+        </p>
+        <p>
+            <label for="password">password</label>
+            <input type="password" th:field="*{password}" id="password" placeholder="password">
+            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+        </p>
+        <p>
+            <input type="submit" value="Login">
+        </p>
+    </fieldset>
 </form>
 </body>
 </html>

@@ -24,6 +24,9 @@ table td {
     border: 2px solid var(--main-bg-color);
     word-break: break-all;
 }
+table td select{
+   background-color:#E8ECEB;
+}
 textarea.desc{
      text-algin: left;
      border:0.1em solid #EDF5E1;
@@ -47,10 +50,10 @@ input{
     text-decoration:none;
     font-family:'Roboto',sans-serif;
     font-weight:300;
-    color:#EDF5E1;
+    color: var(--main-bg-color);
     text-align:center;
     transition: all 0.2s;
-    background-color: #05386B;
+    background-color: #E8ECEB;
 }
 
 .add{
@@ -81,7 +84,7 @@ button{
     text-decoration:none;
     font-family:'Roboto',sans-serif;
     font-weight:300;
-    color:var(--main-bg-color);
+    color:
     text-align:center;
     transition: all 0.2s;
     background-color:#5CBD95;
@@ -92,16 +95,15 @@ button:hover{
     background-color:var(--2nd-bg-color);
 }
 a:link {
-  color: var(--main-bg-color);
+  color: blue;
   text-decoration: none;
   appearance: button;
-  background-color: #5CBD95;
   padding: 2px;
 }
 
 /* visited link */
 a:visited {
-  color: var(--main-bg-color);
+  color: blue;
   text-decoration: none;
   appearance: button;
 }
@@ -126,3 +128,11 @@ h2 {
     text-align: center;
     color: var(--main-bg-color);
 }
+ fieldset {
+     min-width: 200px;
+     display: inline-block;
+ }
+
+ fieldset input{
+     float: right;
+ }
