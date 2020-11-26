@@ -74,6 +74,9 @@ public class HomeController {
         return "Hike";
     }
 
-
+//    @RequestMapping(value="/addmountain", method = RequestMethod.GET)
+//    public String addHikeForm(Item item){
+//        return "add-mountain";
+//    }
 
 }

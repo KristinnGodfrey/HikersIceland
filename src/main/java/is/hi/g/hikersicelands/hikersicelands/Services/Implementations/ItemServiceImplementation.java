@@ -7,6 +7,7 @@ import is.hi.g.hikersicelands.hikersicelands.Repositories.ItemRepository;
 import is.hi.g.hikersicelands.hikersicelands.Services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,7 +37,9 @@ public class ItemServiceImplementation implements ItemService {
     }
 
     @Override
-    public Optional<Item> findByMountains(String mountain) {
-        return repository.findByMountains(mountain);
+    public void deleteItemById(Long id){
+        repository.deleteItemById(id);
     }
+
+
 }

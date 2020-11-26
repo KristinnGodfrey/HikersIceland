@@ -15,7 +15,6 @@ public class Achievement {
     @ManyToOne
     private Hike hike;
 
-
     // Smiður
     public Achievement(String name, String description, int difficulty, Hike hike) {
         this.name = name;

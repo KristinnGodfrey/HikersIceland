@@ -9,16 +9,16 @@ public class Item {
     private long id;
     private String name;
     private String description;
-    private String mountains;
+    private ItemType itemType;
     private String image;
 
     @ManyToOne
     private Hike hike;
 
-    public Item(long id, String name, String description, String image, Hike hike) {
-        this.id = id;
+    public Item(String name, String description, ItemType itemType, String image, Hike hike) {
         this.name = name;
         this.description = description;
+        this.itemType = itemType;
         this.image = image;
         this.hike = hike;
     }
@@ -64,5 +64,13 @@ public class Item {
 
     public void setHike(Hike hike) {
         this.hike = hike;
+    }
+
+    public ItemType getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(ItemType itemType) {
+        this.itemType = itemType;
     }
 }
