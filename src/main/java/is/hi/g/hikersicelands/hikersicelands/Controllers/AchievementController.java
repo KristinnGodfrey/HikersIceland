@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class AchievementController {
@@ -42,7 +43,7 @@ public class AchievementController {
         // find the hike
         Hike hike = hikeService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
         // create a new Achievement
-        Achievement saveAchievement = new Achievement(achievement.getName(), achievement.getDescription(), achievement.getDifficulty(), hike, false);
+        Achievement saveAchievement = new Achievement(achievement.getName(), achievement.getDescription(), achievement.getDifficulty(), hike);
         achievementService.save(saveAchievement);
 
         Hike updatedHike = hikeService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
@@ -90,9 +91,11 @@ public class AchievementController {
 
         achievement = achievementService.findAchievementById(id);
 
-        achievementService.save(new Achievement(achievement.getName(), achievement.getDescription(), achievement.getDifficulty(), achievement.getHike(), true));
-
-        achievementService.deleteAchievementById(id);
+        Profile profile = profileService.searchProfileByUsername(sessionUsername);
+        List<Achievement> completedAchievements = profile.getCompletedAchievements();
+        completedAchievements.add(achievement);
+        profileService.deleteProfileByUsername(sessionUsername); // delete old and insert new
+        Profile newProfile = profileService.saveProfile(new Profile(profile.getUsername(), profile.getPassword(), profile.getName(), profile.getAge(), profile.getAdmin(), completedAchievements));
 
         Hike hike = hikeService.findById(hikeid).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
         model.addAttribute("hike", hike);

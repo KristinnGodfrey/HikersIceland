@@ -17,12 +17,8 @@ public class Achievement {
     private Hike hike;
 
 
-    private Boolean completed;
-
-
     // Smiður
-    public Achievement(String name, String description, int difficulty, Hike hike, Boolean completed) {
-        this.completed = completed;
+    public Achievement(String name, String description, int difficulty, Hike hike) {
         this.name = name;
         this.description = description;
         this.difficulty = difficulty;
@@ -74,11 +70,4 @@ public class Achievement {
         this.hike = hike;
     }
 
-    public Boolean getCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(Boolean completed) {
-        this.completed = completed;
-    }
 }

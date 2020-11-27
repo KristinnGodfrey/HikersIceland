@@ -158,12 +158,13 @@
             </tr>
             <tr th:each="achievement : ${hike.achievements}">
 
-                <td> <!--COMPLETE button-->
-                    <form th:unless="${achievement.completed}"  action="#" th:action="@{/hike/{hikeid}/achievement/{aid}/complete(hikeid=${hike.id}, aid=${achievement.id})}" th:method="PATCH" >
+                <td th:if="${profile}"> <!--COMPLETE button-->
+                    <form th:unless="${#lists.contains(profile.completedAchievements, achievement)}" action="#" th:action="@{/hike/{hikeid}/achievement/{aid}/complete(hikeid=${hike.id}, aid=${achievement.id})}" th:method="PATCH" >
                         <input type="hidden" name="_method" value="complete" />
                         <button type="submit" id="completeButton">✔</button>
                     </form>
                 </td>
+                <td th:unless="${profile}"></td>
                 <td th:text="${achievement.name}"></td>
                 <td th:text="${achievement.description}"></td>
                 <td th:text="${achievement.difficulty}"></td>

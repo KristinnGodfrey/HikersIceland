@@ -1,5 +1,6 @@
 package is.hi.g.hikersicelands.hikersicelands.Controllers;
 
+import is.hi.g.hikersicelands.hikersicelands.Entities.Hike;
 import is.hi.g.hikersicelands.hikersicelands.Entities.Profile;
 import is.hi.g.hikersicelands.hikersicelands.Services.ProfileService;
 import is.hi.g.hikersicelands.hikersicelands.Services.HikeService;
@@ -62,7 +63,7 @@ public class UserProfileController {
             oldPass = profile.getPassword();
         }
         // gera nýtt
-        Profile newProfile = profileService.saveProfile(new Profile(profile.getUsername(), oldPass, profile.getName(), profile.getAge(), profile.getAdmin()));
+        Profile newProfile = profileService.saveProfile(new Profile(profile.getUsername(), oldPass, profile.getName(), profile.getAge(), profile.getAdmin(), profile.getCompletedAchievements()));
 
         model.addAttribute("profile", newProfile);
         model.addAttribute("successMessage", "Updated successfully!");
@@ -79,6 +80,7 @@ public class UserProfileController {
             profileService.saveProfile(profile);
             model.addAttribute("hikes", hikeService.findAll());
             model.addAttribute("username", null);
+            model.addAttribute("profile", null);
             return "Welcome";
         }
         return "signup";
@@ -99,6 +101,11 @@ public class UserProfileController {
         if (profileService.loginProfile(profile.getUsername(), profile.getPassword())){
             model.addAttribute("hikes", hikeService.findAll());
             httpSession.setAttribute("username", profile.getUsername());
+            String sessionUsername = (String) httpSession.getAttribute("username");
+            if(sessionUsername != null) {
+                Profile sessionProfile = profileService.searchProfileByUsername(sessionUsername);
+                model.addAttribute("profile", sessionProfile);
+            }
             return "Welcome";
         }
         else return "login";
