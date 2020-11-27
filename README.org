@@ -1,17 +1,18 @@
 * Hikers Iceland
 
-** Hópur 22
-*** Almar Teitsson, alt15@hi.is
-*** Björgvin Hall, bjh45@hi.is
-*** Friðrik Hreinn Sigurðsson, fhs6@hi.is
-*** Kristinn Godfrey Guðnason, kgg16@hi.is
+*** Hópur 22
+- Almar Teitsson, alt15@hi.is
+- Björgvin Hall, bjh45@hi.is
+- Friðrik Hreinn Sigurðsson, fhs6@hi.is
+- Kristinn Godfrey Guðnason, kgg16@hi.is
 
 ** How to run the program
 *** Prequisites
-**** Use a java SDK version 1.8
+Use a java SDK version 1.8
 *** Setup
-**** Clone this repository into your local machine
-**** In your IDE select HikersicelandApplication as your main class
-**** Build the program to download dependencies as defined in pom.xml
-**** Run the application and open localhost:8080 in your browser
+- Clone this repository into your local machine
+- In your IDE select HikersicelandApplication as your main class
+- Build the program to download dependencies as defined in pom.xml
+- Run the application and open localhost:8080 in your browser
+
 
