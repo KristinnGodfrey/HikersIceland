@@ -1,177 +1,39 @@
-* HomeController
-#+begin_src 
-package is.hi.g.hikersicelands.hikersicelands;
+* Hikers Iceland
 
-import is.hi.g.hikersicelands.hikersicelands.Entities.Movie;
-import is.hi.g.hikersicelands.hikersicelands.Services.MovieService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+*** Hópur 22
+- Almar Teitsson, alt15@hi.is
+- Björgvin Hall, bjh45@hi.is
+- Friðrik Hreinn Sigurðsson, fhs6@hi.is
+- Kristinn Godfrey Guðnason, kgg16@hi.is
 
-@Controller
-public class HomeController {
-    private MovieService movieService;
-    @Autowired
-    public HomeController(MovieService movieService) {
-        this.movieService = movieService;
-    }
-    @RequestMapping("/")
-    public String Home(Model model) {
-        model.addAttribute("Movies",movieService.findAll()); // senda gögn í html skjalið okkar
-        return "Welcome";
-    }
+** How to run the program
+*** Prequisites
+Use a java SDK version 1.8
+*** Setup
+- Clone this repository into your local machine
+- In your IDE select HikersicelandApplication as your main class
+- Build the program to download dependencies as defined in pom.xml
+- Run the application and open localhost:8080 in your browser
 
-//    @RequestMapping("/addmovie", method = RequestMethod.POST)
-//    public String addMovie(Movie movie, BindingResult result, Model model) {
-//        if(result.hasErrors()){
-//            return "add-movie";
-//        }
-//        movieService.save(movie); // vista biomynd
-//        model.addAttribute("movies", movieService.findAll()); // sækja allar biomyndirnar aftur
-//        return "Welcome";
-//    }
-    @RequestMapping(value = "/addmovie", method = RequestMethod.GET)
-    public String addMovieForm(Model model) {
-        return "add-movie";
-    }
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String deleteMovie(@PathVariable("id") long id, Model model) {
-        Movie movie = movieService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid Movie ID"));
-        movieService.delete(movie);
-        model.addAttribute("movies", movieService.findAll());
-        return "Welcome";
-    }
+** Project info
+*** DB
+Our db inside this Github repository has some dummy data so that assignment reviewers have a better understanding of how that display is structured.
 
-    @RequestMapping("/login")
-    public static String Login() {
-        return "Login";
-    }
+*** Admin
+We have created a admin user that can be used for assignment reviewers, but they may aswell create a new one.
+- user: hikeadmin
+- pass: admin
 
-    @RequestMapping("/signup")
-    public static String Signup() {
-        return "Signup";
-    }
-}
+*** Privileges of user
+They can:
+- Not create any data, except for new accounts when signing up.
+- Read data from the site.
+- Update their achievements.
+- Not delete anything
 
-#+end_src
-* Entities/Movie
-#+begin_src 
-package is.hi.g.hikersicelands.hikersicelands.Entities;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
-public class Movie {
-
-    @Id // aðal lykill okkar er því id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    private String title;
-    private String description;
-    private Double rating;
-
-    public Movie() { // það þarf að vera til smiður
-
-    }
-
-    public Movie(String title, String description, Double rating) {
-        this.title = title;
-        this.description = description;
-        this.rating = rating;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Double getRating() {
-        return rating;
-    }
-
-    public void setRating(Double rating) {
-        this.rating = rating;
-    }
-}
-
-#+end_src
-
-* Repositories/MovieRepository
-#+begin_src 
-package is.hi.g.hikersicelands.hikersicelands.Repositories;
-
-
-import is.hi.g.hikersicelands.hikersicelands.Entities.Movie;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-
-import java.util.List;
-import java.util.Optional;
-
-// jparepository kemur fra dependencies sem við sóttum
-// jparepostiry hefur ákveðin föll sem hann skilur og gerir magic.
-public interface MovieRepository extends JpaRepository<Movie, Long> {
-    // hér búum við til öll föllinn sem gagnagrunnurinn á að styðja
-
-    //skilagildi fallnafn parameter-týpa parameter
-    Movie save(Movie movie);
-    void delete(Movie movie);
-    List<Movie> findAll();
-    List<Movie> findByTitle(String title);
-    Optional<Movie> findById(long id);
-
-
-    // þetta virkar líka eitthvað svona: @Query("SELECT * FROM tafla WHERE ) fallið
-
-}
-
-#+end_src
-
-* Services/MovieService
-#+begin_src 
-package is.hi.g.hikersicelands.hikersicelands.Services;
-
-import is.hi.g.hikersicelands.hikersicelands.Entities.Movie;
-
-import java.util.List;
-import java.util.Optional;
-
-// tilgangurinn á að gera þetta tvisvar: kannski er ekki hægt að gera nákvæmlega það sem viljum gera,
-// þá er service millag milli controllers og gagnagrunnsins,
-public interface MovieService {
-    Movie save(Movie movie);
-
-    void delete(Movie movie);
-    List<Movie> findAll();
-    List<Movie> findByTitle(String title);
-    Optional<Movie> findById(long id);
-}
-#+end_src
-
+*** Privileges of admin
+They can:
+- Create new hikes, items (mountains, wildlife, flora), and achievemnts.
+- Read all data.
+- Update achievements.
+- Delete every entry.
