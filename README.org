@@ -26,14 +26,14 @@ We have created an admin user that can be used for assignment reviewers, but the
 
 *** Privileges of user
 They can:
-- Not create any data, except for new accounts when signing up.
+- Create reviews.
 - Read data from the site.
-- Update their achievements.
+- Update their profile, achievements.
 - Not delete anything
 
 *** Privileges of admin
 They can:
-- Create new hikes, items (mountains, wildlife, flora), and achievemnts.
+- Create new hikes, items (mountains, wildlife, flora), and achievements, reviews.
 - Read data from the site.
 - Update achievements.
 - Delete every entry.
