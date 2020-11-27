@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProfileRepository extends JpaRepository<Profile, Long>{
     Profile save(Profile profile);
-    Profile findByUsername(String username);
+    Profile findByUsername(String username); //hver user hefur mismunandi username
     List<Profile> findByName(String name);
     @Transactional
     void deleteByUsername(String username);

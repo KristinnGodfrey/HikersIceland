@@ -9,7 +9,6 @@ public interface ProfileService {
 
     Boolean loginProfile(String username, String password);
     Profile saveProfile(Profile profile);
-    Profile privateMode(boolean priv);
     List<Profile> searchProfileByName(String name);
     Profile searchProfileByUsername(String name);
     void deleteProfileByUsername(String username);
