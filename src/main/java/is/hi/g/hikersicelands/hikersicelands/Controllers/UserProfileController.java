@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+//ber ábyrgð á login, signup og http session
 @Controller
 public class UserProfileController {
 
@@ -27,9 +28,10 @@ public class UserProfileController {
         this.hikeService = hikeService;
     }
 
+    //birtir viðeigandi myprofile view fyrir mismunandi profile/user
     @RequestMapping(value = "/myprofile", method = RequestMethod.GET)
     public String myProfile(Model model, HttpSession httpSession) {
-        // Get logged in username from session
+        // Loggar inn í username frá session
         String sessionUsername = (String) httpSession.getAttribute("username");
         if(sessionUsername == null) {
             model.addAttribute("profile", new Profile());
@@ -46,20 +48,21 @@ public class UserProfileController {
         return "myprofile";
     }
 
+    //uppfærir user/profile upplýsingar ef þeim er breytt
     @RequestMapping(value = "/myprofile", method = RequestMethod.POST)
     public String myProfileUpdate(@Valid Profile profile, BindingResult result, Model model, HttpSession httpSession){
         if(result.hasErrors()){
             return "login";
         }
-        // delete old
+        // eyða gamla
         String oldPass = profileService.searchProfileByUsername(profile.getUsername()).getPassword();
         profileService.deleteProfileByUsername(profile.getUsername());
 
         if(!profile.getPassword().equals("")){
-            // update password if new
+            // uppfæra password ef breytt
             oldPass = profile.getPassword();
         }
-        // create new
+        // gera nýtt
         Profile newProfile = profileService.saveProfile(new Profile(profile.getUsername(), oldPass, profile.getName(), profile.getAge(), profile.getAdmin(), profile.getCompletedAchievements()));
 
         model.addAttribute("profile", newProfile);
@@ -67,6 +70,7 @@ public class UserProfileController {
         return "myProfile";
     }
 
+    //handler fyrir signup view
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signup(@Valid Profile profile, BindingResult result, Model model){
         if(result.hasErrors()){
@@ -88,6 +92,7 @@ public class UserProfileController {
         return "signup";
     }
 
+    //handler fyrir login view
     @RequestMapping(value="/login", method = RequestMethod.POST)
     public String login(@Valid Profile profile, BindingResult result, Model model, HttpSession httpSession){
         if(result.hasErrors() | profile.getUsername().equals(null) | profile.getPassword().equals(null)){
@@ -105,6 +110,7 @@ public class UserProfileController {
         }
         else return "login";
     }
+
 
     @RequestMapping(value="/login", method = RequestMethod.GET)
     public String addLoginForm(Profile profile, Model model){

@@ -34,12 +34,6 @@ public class ProfileServiceImplementation implements ProfileService {
             return repository.save(profile);
     }
 
-    // Setja profile á eða af private mode
-    @Override
-    public Profile privateMode(boolean priv){
-        return privateMode(priv);
-    }
-
     // leita að profile út frá nafni
     @Override
     public List<Profile> searchProfileByName(String name){
