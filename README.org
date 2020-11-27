@@ -15,4 +15,25 @@ Use a java SDK version 1.8
 - Build the program to download dependencies as defined in pom.xml
 - Run the application and open localhost:8080 in your browser
 
+** Project info
+*** DB
+Our db inside this Github repository has some dummy data so that assignment reviewers have a better understanding of how that display is structured.
 
+*** Admin
+We have created a admin user that can be used for assignment reviewers, but they may aswell create a new one.
+- user: hikeadmin
+- pass: admin
+
+*** Privileges of user
+They can:
+- Not create any data, except for new accounts when signing up.
+- Read data from the site.
+- Update their achievements.
+- Not delete anything
+
+*** Privileges of admin
+They can:
+- Create new hikes, items (mountains, wildlife, flora), and achievemnts.
+- Read all data.
+- Update achievements.
+- Delete every entry.
