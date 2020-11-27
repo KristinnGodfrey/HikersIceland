@@ -33,6 +33,7 @@ public class ReviewController {
         this.hikeService = hikeService;
         this.profileService = profileService;
     }
+    //Eyðir ákveðnu review
     @RequestMapping(value ="/hike/{hikeid}/review/{reviewid}", method = RequestMethod.POST)
     public String deleteReview(@PathVariable("hikeid") long hikeid, @PathVariable("reviewid") long id, @Valid Review review, BindingResult result, Model model, HttpSession httpSession){
         if(result.hasErrors()){
@@ -50,6 +51,7 @@ public class ReviewController {
         }
         return "Reviews";
     }
+    //birtir öll review
     @RequestMapping("/hike/{id}/reviews")
     public String getReviews(@PathVariable("id") long id, Model model, HttpSession httpSession){
         Hike hike = hikeService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
@@ -63,6 +65,7 @@ public class ReviewController {
         }
         return "Reviews";
     }
+    //Fall sem býr til review á ákveðið hike
     @RequestMapping(value = "/hike/{id}/reviews", method = RequestMethod.POST)
     public String postReviews(@PathVariable("id") long id, @Valid Review review, BindingResult result, Model model, HttpSession httpSession){
         Hike hike = hikeService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
