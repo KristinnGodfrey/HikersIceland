@@ -1,6 +1,8 @@
 package is.hi.g.hikersicelands.hikersicelands.Entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Profile {
@@ -16,8 +18,9 @@ public class Profile {
     private int age;
     private boolean admin;
 
-    @OneToOne
-    private Achievement achievement;
+    @ManyToMany
+    private List<Achievement> completedAchievements = new ArrayList<>();
+
 
     // Tómur smiður
     public Profile(){
@@ -25,12 +28,13 @@ public class Profile {
     }
 
     // Smiður
-    public Profile(String username, String password, String name, int age, boolean admin){
+    public Profile(String username, String password, String name, int age, boolean admin, List<Achievement> completedAchievements){
         this.username = username;
         this.password = password;
         this.name = name;
         this.age= age;
         this.admin = admin;
+        this.completedAchievements = completedAchievements;
     }
 
     // Getters og setters
@@ -62,11 +66,13 @@ public class Profile {
         return admin;
     }
 
-    public Achievement getAchievement() {
-        return achievement;
+    public List<Achievement> getCompletedAchievements() {
+        return completedAchievements;
     }
 
-    public void setAchievement(Achievement achievement) {
-        this.achievement = achievement;
+    public void setCompletedAchievements(List<Achievement> completedAchievements) {
+        this.completedAchievements = completedAchievements;
     }
+
+
 }
