@@ -9,4 +9,5 @@ public interface HikeService {
     Hike save(Hike hike);
     List<Hike> findAll();
     Optional<Hike> findById(Long id);
+    void deleteHikeById(Long id);
 }

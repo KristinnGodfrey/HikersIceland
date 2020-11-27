@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-/*
+
 @Service
 public class ProfileServiceImplementation implements ProfileService {
 
@@ -20,29 +20,35 @@ public class ProfileServiceImplementation implements ProfileService {
 
     // Logga inn profile
     @Override
-    public Profile loginProfile(String username, String password){
-        return repository.loginProfile(username, password);
+    public Boolean loginProfile(String username, String password) {
+        Profile profile = searchProfileByUsername(username);
+        if (profile == null) return false;
+        if (profile.getPassword().equals(password)) {
+            return true;
+        } else return false;
     }
 
     // Búa til profile
     @Override
-    public Profile createProfile(String username, String password){
-        return repository.createProfile(username, password);
-    }
-
-    // Setja profile á eða af private mode
-    @Override
-    public Profile privateMode(boolean priv){
-        return repository.privateMode(priv);
+    public Profile saveProfile(Profile profile){
+            return repository.save(profile);
     }
 
     // leita að profile út frá nafni
     @Override
-    public List<Profile> searchProfile(String name){
-        return repository.searchProfileByName(name);
+    public List<Profile> searchProfileByName(String name){
+        return repository.findByName(name);
     }
 
+    // leita að profile út frá unique nafni
+    @Override
+    public Profile searchProfileByUsername(String name){
+        return repository.findByUsername(name);
+    }
+
+    @Override
+    public void deleteProfileByUsername(String username) {
+        repository.deleteByUsername(username);
+    }
 
 }
-
- */

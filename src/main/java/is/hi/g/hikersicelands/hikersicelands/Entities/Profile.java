@@ -1,15 +1,14 @@
 package is.hi.g.hikersicelands.hikersicelands.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Profile {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String password;
 
@@ -17,7 +16,11 @@ public class Profile {
     private String username;
     private String name;
     private int age;
-    private boolean priv;
+    private boolean admin;
+
+    @ManyToMany
+    private List<Achievement> completedAchievements = new ArrayList<>();
+
 
     // Tómur smiður
     public Profile(){
@@ -25,11 +28,13 @@ public class Profile {
     }
 
     // Smiður
-    public Profile(String username, String name, int age, boolean priv){
+    public Profile(String username, String password, String name, int age, boolean admin, List<Achievement> completedAchievements){
         this.username = username;
+        this.password = password;
         this.name = name;
         this.age= age;
-        this.priv = priv;
+        this.admin = admin;
+        this.completedAchievements = completedAchievements;
     }
 
     // Getters og setters
@@ -53,7 +58,21 @@ public class Profile {
 
     public void setAge(int age) {this.age = age;}
 
-    public boolean getPriv() {return priv;}
+    public boolean getAdmin() {return admin;}
 
-    public void setPriv(boolean priv) {this.priv = priv;}
+    public void setAdmin(boolean priv) {this.admin = priv;}
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public List<Achievement> getCompletedAchievements() {
+        return completedAchievements;
+    }
+
+    public void setCompletedAchievements(List<Achievement> completedAchievements) {
+        this.completedAchievements = completedAchievements;
+    }
+
+
 }

@@ -1,35 +1,31 @@
 package is.hi.g.hikersicelands.hikersicelands.Entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-public class Achievement {
+public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id; // Achievement Id
-    private String name; // titill
-    private String description; // skýring
-    private int difficulty; // erfiðleiki
+    private long id;
+    private String name;
+    private String description;
+    private ItemType itemType;
+    private String image;
 
     @ManyToOne
     private Hike hike;
 
-
-    // Smiður
-    public Achievement(String name, String description, int difficulty, Hike hike) {
+    public Item(String name, String description, ItemType itemType, String image, Hike hike) {
         this.name = name;
         this.description = description;
-        this.difficulty = difficulty;
+        this.itemType = itemType;
+        this.image = image;
         this.hike = hike;
     }
 
-    // Tómur smiður
-    public Achievement() {
+    public Item() {
     }
 
-    // Getters og setters
     public long getId() {
         return id;
     }
@@ -54,12 +50,12 @@ public class Achievement {
         this.description = description;
     }
 
-    public int getDifficulty() {
-        return difficulty;
+    public String getImage() {
+        return image;
     }
 
-    public void setDifficulty(int difficulty) {
-        this.difficulty = difficulty;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Hike getHike() {
@@ -70,4 +66,11 @@ public class Achievement {
         this.hike = hike;
     }
 
+    public ItemType getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(ItemType itemType) {
+        this.itemType = itemType;
+    }
 }
