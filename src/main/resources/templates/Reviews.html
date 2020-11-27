@@ -3,27 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/mainstyle.css}"/>
 </head>
 <body>
-<div th:switch="${reviews}">
-    <h2 th:case="null">No Reviews yet!</h2>
-    <div th:case="*">
-        <h2>Reviews</h2>
+    <div>
+        <a th:href="@{/hike/{hikeid}/(hikeid=${hike.id})}">Back</a>
         <table>
             <thead>
             <tr>
                 <th>Rating</th>
+                <th>Review</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="review : ${reviews}">
-                <td th:text="${review.rating}"></td>
-                <td><a th:href="@{/delete/{id}(id=${review.id})}">Delete</a></td>
+            <tr>
+                <form action="#" th:action="@{/hike/{id}/reviews(id=${hike.id})}" th:object="${review}" method="post">
+                    <td><input class ="rating" type="number" min="0" max="5"  th:field="*{rating}" id="rating" placeholder="0-5"></td>
+                    <td><textarea class ="desc" type="text" th:field="*{reviewText}" id="description" placeholder="Review"></textarea></td>
+                    <td><button class ="add" type="submit" value="Add" >Add</button></td>
+                </form>
             </tr>
+            <tr th:each="review : ${hike.reviews}">
+                <td th:text="${review.rating}"></td>
+                <td th:text="${review.reviewText}"></td>
+                <td th:if="${profile}"> <!--DELETE button-->
+                    <form th:if="${profile.admin}" action="#" th:action="@{/hike/{hikeid}/review/{aid}(hikeid=${hike.id}, aid=${review.id})}" th:method="DELETE" >
+                        <input type="hidden" name="_method" value="delete" />
+                        <button class="del" type="submit" id="submitButton">Delete</button>
+                    </form>
+                </td>
+            </tr>
+
             </tbody>
         </table>
     </div>
-    <p><a href="/addreview">Add a new Review</a></p>
 </div>
 </body>
 </html>

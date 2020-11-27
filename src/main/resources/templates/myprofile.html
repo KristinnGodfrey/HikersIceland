@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My profile</title>
+    <link rel="stylesheet" th:href="@{/css/mainstyle.css}"/>
+</head>
+<body>
+<a th:href="@{/}">Back</a>
+    <h1>My Profile</h1>
+    <form action="#" th:object="${profile}" th:action="@{/myprofile}" th:method="PATCH" >
+        <div class="myprofile-input">
+            <H3>Name</H3>
+            <input type="text" th:field="*{name}" id="name" placeholder="">
+        </div>
+        <div class="myprofile-input">
+            <H3>Age</H3>
+            <input type="number" th:field="*{age}" id="age" placeholder="">
+        </div>
+        <div class="myprofile-input">
+            <H3>Username</H3>
+            <input type="text" th:field="*{username}" id="username" placeholder="">
+        </div>
+        <div class="myprofile-input">
+            <H3>Reset password</H3>
+            <input type="password" th:field="*{password}" id="password" placeholder="">
+        </div>
+        <div class="myprofile-input">
+            <H3>Admin</H3>
+            <input type="text" th:field="*{admin}" id="admin" placeholder="">
+        </div>
+        <div class="submitDiv">
+            <input type="submit" value="Uppfæra" /></td>
+            <div th:if="${successMessage}">
+                <div class="successMessage" th:text="${successMessage}"></div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

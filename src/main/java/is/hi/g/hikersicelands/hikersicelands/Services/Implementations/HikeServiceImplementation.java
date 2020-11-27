@@ -6,15 +6,16 @@ import is.hi.g.hikersicelands.hikersicelands.Services.HikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class HikeServiceImplementations implements HikeService {
+public class HikeServiceImplementation implements HikeService {
     HikeRepository repository;
 
     @Autowired
-    public HikeServiceImplementations(HikeRepository hikeRepository){this.repository = hikeRepository;}
+    public HikeServiceImplementation(HikeRepository hikeRepository){this.repository = hikeRepository;}
 
     // vista hike
     @Override
@@ -25,12 +26,18 @@ public class HikeServiceImplementations implements HikeService {
     // ná í öll hikes
     @Override
     public List<Hike> findAll() {
-        return repository.findAll();
+
+        List<Hike> hikes = repository.findAll();
+        Collections.reverse(hikes);
+        return hikes;
     }
 
     // ná í öll hikes þar sem id er tilgreint
     @Override
-    public Optional<Hike> findById(Long id) {
-        return repository.findById(id);
+    public Optional<Hike> findById(Long id) { return repository.findById(id); }
+
+    @Override
+    public void deleteHikeById(Long id) {
+        repository.deleteHikeById(id);
     }
 }

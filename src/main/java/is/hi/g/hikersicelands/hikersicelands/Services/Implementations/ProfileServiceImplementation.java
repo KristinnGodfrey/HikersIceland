@@ -18,23 +18,37 @@ public class ProfileServiceImplementation implements ProfileService {
         this.repository = profileRepository;
     }
 
+    // Logga inn profile
     @Override
-    public Profile loginProfile(String username, String password){
-        return repository.loginProfile(username, password);
+    public Boolean loginProfile(String username, String password) {
+        Profile profile = searchProfileByUsername(username);
+        if (profile == null) return false;
+        if (profile.getPassword().equals(password)) {
+            return true;
+        } else return false;
+    }
+
+    // Búa til profile
+    @Override
+    public Profile saveProfile(Profile profile){
+            return repository.save(profile);
+    }
+
+    // leita að profile út frá nafni
+    @Override
+    public List<Profile> searchProfileByName(String name){
+        return repository.findByName(name);
+    }
+
+    // leita að profile út frá unique nafni
+    @Override
+    public Profile searchProfileByUsername(String name){
+        return repository.findByUsername(name);
     }
 
     @Override
-    public Profile createProfile(String username, String password){
-        return repository.createProfile(username, password);
+    public void deleteProfileByUsername(String username) {
+        repository.deleteByUsername(username);
     }
 
-    @Override
-    public Profile privateMode(boolean priv){
-        return repository.privateMode(priv);
-    }
-
-    @Override
-    public List<Profile> searchProfile(String name){
-        return repository.searchProfile(name);
-    }
 }

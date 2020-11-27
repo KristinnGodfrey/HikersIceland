@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface ReviewService {
     Review save(Review review);
-    void delete(Review review);
+    void deleteReviewById(Long id);
     List<Review> findAll();
     List<Review> findByhikeId(String hikeId);
     Optional<Review> findById(Long id);
