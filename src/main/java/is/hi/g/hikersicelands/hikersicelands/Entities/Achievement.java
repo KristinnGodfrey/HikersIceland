@@ -1,5 +1,7 @@
 package is.hi.g.hikersicelands.hikersicelands.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +15,9 @@ public class Achievement {
     private String description; // skýring
     private int difficulty; // erfiðleiki
 
+
     @ManyToOne
+    @JsonIgnore
     private Hike hike;
 
 

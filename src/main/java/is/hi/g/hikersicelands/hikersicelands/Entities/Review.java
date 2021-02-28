@@ -1,5 +1,7 @@
 package is.hi.g.hikersicelands.hikersicelands.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +15,7 @@ public class Review {
     private int rating;
 
     @ManyToOne
+    @JsonIgnore
     private Hike hike;
 
     public Review() {

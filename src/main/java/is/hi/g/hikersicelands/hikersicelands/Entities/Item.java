@@ -1,6 +1,7 @@
 package is.hi.g.hikersicelands.hikersicelands.Entities;
 
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Item {
@@ -13,6 +14,7 @@ public class Item {
     private String image;
 
     @ManyToOne
+    @JsonIgnore
     private Hike hike;
 
     public Item(String name, String description, ItemType itemType, String image, Hike hike) {
