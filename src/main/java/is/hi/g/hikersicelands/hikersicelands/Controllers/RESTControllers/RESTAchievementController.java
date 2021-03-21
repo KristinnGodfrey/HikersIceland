@@ -33,7 +33,7 @@ public class RESTAchievementController {
         this.profileService = profileService;
     }
 
-    @RequestMapping(value = "/rest/hikes/{hikeid}/achievements/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/rest/hikes/{hikeid}/achievements/{id}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public ResponseEntity<Object> getAchievement(@PathVariable("id") long id, Model model, HttpSession httpSession){
         Achievement achievement;
         try {
@@ -47,8 +47,7 @@ public class RESTAchievementController {
         }
     }
 
-    @PostMapping(value ="rest/hikes/{hikeid}/achievements/{achievementid}",
-            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @PostMapping(value ="rest/hikes/{hikeid}/achievements/{achievementid}", produces = "application/json;charset=UTF-8")
     public Object completeAchievement(@PathVariable("hikeid") long hikeid, @PathVariable("achievementid") long id, HttpSession httpSession){
         String sessionUsername = (String) httpSession.getAttribute("username");
         if (sessionUsername == null) {

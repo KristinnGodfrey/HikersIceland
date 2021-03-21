@@ -28,7 +28,7 @@ public class RESTUserProfileController {
     }
 
     //birtir viðeigandi myprofile view fyrir mismunandi profile/user
-    @RequestMapping(value = "/rest/profile", method = RequestMethod.GET)
+    @RequestMapping(value = "/rest/profile", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public Object myProfile(Model model, HttpSession httpSession) {
         // Loggar inn í username frá session
         String sessionUsername = (String) httpSession.getAttribute("username");
@@ -44,7 +44,7 @@ public class RESTUserProfileController {
     }
 
     //uppfærir user/profile upplýsingar ef þeim er breytt
-    @RequestMapping(value = "/rest/profile", method = RequestMethod.POST)
+    @RequestMapping(value = "/rest/profile", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public Object myProfileUpdate(@Valid Profile profile, BindingResult result, Model model, HttpSession httpSession){
         if(result.hasErrors()){
             return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
@@ -72,7 +72,7 @@ public class RESTUserProfileController {
     @PostMapping(
             value="/rest/signup",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+            produces = "application/json;charset=UTF-8")
     public Object signup(@RequestBody Profile profile, BindingResult result){
         if(result.hasErrors()){
             return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
@@ -95,7 +95,7 @@ public class RESTUserProfileController {
     @PostMapping(
             value="/rest/login",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+            produces = "application/json;charset=UTF-8")
     public Object login(@RequestBody Profile profile, BindingResult result, Model model, HttpSession httpSession){
         if(result.hasErrors()){
             return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);

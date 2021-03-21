@@ -32,7 +32,7 @@ public class RESTHomeController {
         this.profileService = profileService;
     }
 
-    @RequestMapping("/rest/hikes")
+    @RequestMapping( value="/rest/hikes", produces = "application/json;charset=UTF-8")
     public ResponseEntity<List<Hike>> Home(Model model, HttpSession httpSession) {
 
         String sessionUsername = (String) httpSession.getAttribute("username");
@@ -45,7 +45,7 @@ public class RESTHomeController {
         return ResponseEntity.ok(hikes);
     }
 
-    @RequestMapping("/rest/hikes/{id}")
+    @RequestMapping(value = "/rest/hikes/{id}", produces = "application/json;charset=UTF-8")
     public ResponseEntity<Object> getHike(@PathVariable("id") long id, Model model, HttpSession httpSession){
         Hike hike;
         try {

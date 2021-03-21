@@ -49,7 +49,7 @@ public class RESTReviewController {
     }
 
     //birtir öll review
-    @RequestMapping(value = "rest/hikes/{id}/reviews", method = RequestMethod.GET)
+    @RequestMapping(value = "rest/hikes/{id}/reviews", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public ResponseEntity<Object> getReviews(@PathVariable("id") long id, Model model, HttpSession httpSession){
         Hike hike;
         try {
@@ -66,7 +66,7 @@ public class RESTReviewController {
     @PostMapping(
             value="rest/hikes/{id}/reviews",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+            produces = "application/json;charset=UTF-8")
     public ResponseEntity<Object> postReviews(@PathVariable("id") long id, @RequestBody Review review, HttpSession httpSession){
         Hike hike;
         try {
