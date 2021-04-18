@@ -1,7 +1,5 @@
 package is.hi.g.hikersicelands.hikersicelands.Entities;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
-
 public enum ItemType {
     MOUNTAIN("mountain"),
     WILDLIFE("wildlife"),
