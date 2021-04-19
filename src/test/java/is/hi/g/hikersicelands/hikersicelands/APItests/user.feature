@@ -24,10 +24,10 @@ Feature: user
      }
      """
 
-  @ignore
+#   @ignore
   Scenario: patch age on profile should return updated profile
     Given path '/profile'
     When method PATCH
-    And request { 'age': '99' }
+    And request { 'age': '998877' }
     Then status 200
-    And match response.age == 99
+    And match response.age == 998877
