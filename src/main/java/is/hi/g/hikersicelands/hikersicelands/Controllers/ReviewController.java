@@ -70,15 +70,18 @@ public class ReviewController {
     public String postReviews(@PathVariable("id") long id, @Valid Review review, BindingResult result, Model model, HttpSession httpSession){
         Hike hike = hikeService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
         Review saveReview = new Review(review.getReviewText(), review.getRating(), hike);
-        reviewService.save(saveReview);
-        Hike updatedHike = hikeService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
-        model.addAttribute("hike", updatedHike);
-        model.addAttribute("review", new Review());
         String sessionUsername = (String) httpSession.getAttribute("username");
         if(sessionUsername != null) {
             Profile sessionProfile = profileService.searchProfileByUsername(sessionUsername);
             model.addAttribute("profile", sessionProfile);
+            saveReview.setuserId(sessionProfile.getName());
         }
+        reviewService.save(saveReview);
+        Hike updatedHike = hikeService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
+        model.addAttribute("hike", updatedHike);
+        model.addAttribute("review", new Review());
+
+
         return "Reviews";
     }
 
