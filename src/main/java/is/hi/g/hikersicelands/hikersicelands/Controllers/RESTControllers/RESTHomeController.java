@@ -5,17 +5,21 @@ import is.hi.g.hikersicelands.hikersicelands.Services.HikeService;
 import is.hi.g.hikersicelands.hikersicelands.Services.ItemService;
 import is.hi.g.hikersicelands.hikersicelands.Services.ProfileService;
 import is.hi.g.hikersicelands.hikersicelands.Services.ReviewService;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StreamUtils;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 @RestController
@@ -31,6 +35,8 @@ public class RESTHomeController {
         this.hikeService = hikeService;
         this.profileService = profileService;
     }
+    @Autowired
+    private ServletContext servletContext;
 
     @RequestMapping( value="/rest/hikes", produces = "application/json;charset=UTF-8")
     public ResponseEntity<List<Hike>> Home(Model model, HttpSession httpSession) {
@@ -57,6 +63,15 @@ public class RESTHomeController {
         } else {
             return ResponseEntity.ok(hike);
         }
+    }
+
+
+    @RequestMapping(value = "/rest/hikes/{id}/image", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+    public void getHikeImage(@PathVariable("id") long id, HttpServletResponse response) throws IOException {
+        String path = "image/" + id + ".jpg";
+        ClassPathResource imgFile = new ClassPathResource(path);
+        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+        StreamUtils.copy(imgFile.getInputStream(), response.getOutputStream());
     }
 
 }
