@@ -69,7 +69,7 @@ public class ReviewController {
     @RequestMapping(value = "/hike/{id}/reviews", method = RequestMethod.POST)
     public String postReviews(@PathVariable("id") long id, @Valid Review review, BindingResult result, Model model, HttpSession httpSession){
         Hike hike = hikeService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
-        Review saveReview = new Review(review.getReviewText(), review.getRating(), hike);
+        Review saveReview = new Review(review.getReviewText(), review.getRating(),review.getuserId(), hike);
         String sessionUsername = (String) httpSession.getAttribute("username");
         if(sessionUsername != null) {
             Profile sessionProfile = profileService.searchProfileByUsername(sessionUsername);
