@@ -75,7 +75,7 @@ public class RESTReviewController {
         if (hike == null) {
             return ResponseEntity.notFound().build();
         }
-        Review saveReview = new Review(review.getReviewText(), review.getRating(), hike);
+        Review saveReview = new Review(review.getReviewText(), review.getRating(), review.getuserId(), hike);
         reviewService.save(saveReview);
         Hike updatedHike = hikeService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid Hike Id"));
         return ResponseEntity.ok(updatedHike);

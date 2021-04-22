@@ -23,10 +23,11 @@ public class Review {
     }
 
     // Smiður til þess að gera review object
-    public Review(String reviewText, int rating, Hike hike) {
+    public Review(String reviewText, int rating, String userId, Hike hike) {
         this.reviewText = reviewText;
         this.rating = rating;
         this.hike = hike;
+        this.userId = userId;
     }
 
     // Getters og Setters fyrir allar breyturnar í þessu review entity
