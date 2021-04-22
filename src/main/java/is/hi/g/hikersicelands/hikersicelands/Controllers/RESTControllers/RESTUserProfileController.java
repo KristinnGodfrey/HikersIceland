@@ -42,7 +42,34 @@ public class RESTUserProfileController {
         }
         return ResponseEntity.ok(profile);
     }
+    @RequestMapping(value = "/rest/profile", method = RequestMethod.PATCH)
+    public Object myProfilePatch(@RequestBody Profile profile, BindingResult result, Model model, HttpSession httpSession) {
+        if (result.hasErrors()) {
+            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+        }
+        String sessionUsername = (String) httpSession.getAttribute("username");
+        Profile sessionProfile = profileService.searchProfileByUsername(sessionUsername);
+        String sessionName = sessionProfile.getName();
+        String sessionPassword = sessionProfile.getPassword();
+        int sessionAge = sessionProfile.getAge();
 
+        if (sessionUsername == null) {
+            return new ResponseEntity<String>("User is not logged in", HttpStatus.UNAUTHORIZED);
+        }
+
+        if (profile.getUsername() != null)
+            sessionProfile.setUsername(profile.getUsername());
+        if (profile.getPassword() != null)
+            sessionProfile.setPassword(profile.getPassword());
+        if (profile.getName() != null)
+            sessionProfile.setName(profile.getName());
+        if (profile.getAge() != 0)
+            sessionProfile.setAge(profile.getAge());
+
+        sessionProfile = profileService.saveProfile(sessionProfile);
+
+        return ResponseEntity.ok(sessionProfile);
+    }
     //uppfærir user/profile upplýsingar ef þeim er breytt
     @RequestMapping(value = "/rest/profile", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public Object myProfileUpdate(@Valid Profile profile, BindingResult result, Model model, HttpSession httpSession){

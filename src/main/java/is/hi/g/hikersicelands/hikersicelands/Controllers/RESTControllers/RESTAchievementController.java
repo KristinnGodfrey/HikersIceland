@@ -47,8 +47,9 @@ public class RESTAchievementController {
         }
     }
 
-    @PostMapping(value ="rest/hikes/{hikeid}/achievements/{achievementid}", produces = "application/json;charset=UTF-8")
-    public Object completeAchievement(@PathVariable("hikeid") long hikeid, @PathVariable("achievementid") long id, HttpSession httpSession){
+    @PostMapping(value = "rest/hikes/{hikeid}/achievements/{achievementid}",
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public Object completeAchievement(@PathVariable("hikeid") long hikeid, @PathVariable("achievementid") long id, HttpSession httpSession) {
         String sessionUsername = (String) httpSession.getAttribute("username");
         if (sessionUsername == null) {
             return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
@@ -59,7 +60,8 @@ public class RESTAchievementController {
         try {
             hike = hikeService.findById(hikeid).orElse(null);
             achievement = achievementService.findAchievementById(id);
-        } finally { }
+        } finally {
+        }
         if (hike == null || achievement == null) {
             return ResponseEntity.notFound().build();
         }
@@ -75,10 +77,8 @@ public class RESTAchievementController {
             completedAchievements.add(achievement);
         }
 
-        // delete old and return new
-        profileService.deleteProfileByUsername(sessionUsername);
-        Profile newProfile = profileService.saveProfile(new Profile(profile.getUsername(), profile.getPassword(), profile.getName(), profile.getAge(), profile.getAdmin(), completedAchievements));
-        return ResponseEntity.ok(newProfile);
+        profile = profileService.saveProfile(profile);
+        return ResponseEntity.ok(profile);
     }
 
 }
