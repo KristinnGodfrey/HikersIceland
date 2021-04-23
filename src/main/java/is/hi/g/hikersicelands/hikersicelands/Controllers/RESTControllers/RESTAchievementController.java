@@ -76,8 +76,9 @@ public class RESTAchievementController {
         }
 
         // delete old and return new
-        profileService.deleteProfileByUsername(sessionUsername);
-        Profile newProfile = profileService.saveProfile(new Profile(profile.getUsername(), profile.getPassword(), profile.getName(), profile.getAge(), profile.getAdmin(), completedAchievements));
-        return ResponseEntity.ok(newProfile);
+//        profileService.searchProfileByUsername(sessionUsername);
+//        Profile newProfile = profileService.saveProfile(new Profile(profile.getUsername(), profile.getPassword(), profile.getName(), profile.getAge(), profile.getAdmin(), completedAchievements));
+        profile = profileService.saveProfile(profile);
+        return ResponseEntity.ok(profile);
     }
 }

@@ -8,13 +8,13 @@ Feature: admin
     * def authToken = response
 
    #TODO create new hike to try this test case
-#  @ignore
+  @ignore
   Scenario: delete hike
     Given path '/hike/4'
     When method DELETE
     Then status 200
 
-#  @ignore
+  @ignore
   Scenario: patch age on other profiles should return updated profile
     Given path '/profile/20'
     When method PATCH

@@ -24,7 +24,7 @@ Feature: user
      }
      """
 
-#   @ignore
+  @ignore
   Scenario: patch age on profile should return updated profile
     Given path '/profile'
     When method PATCH

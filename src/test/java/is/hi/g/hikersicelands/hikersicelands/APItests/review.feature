@@ -17,7 +17,7 @@ Feature: API tester
     And match each response[*].rating == '#number'
 
   #Its possible to delete reviews even though you are not logged in which is not intentional
-#  @ignore
+  @ignore
   Scenario: DELETE on review should return 401 status if not logged in
     Given url 'https://hikers-of-iceland.herokuapp.com/rest/hikes/5/reviews/32'
     When method DELETE

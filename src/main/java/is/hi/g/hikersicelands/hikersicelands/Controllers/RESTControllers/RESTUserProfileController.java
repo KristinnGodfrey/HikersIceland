@@ -112,5 +112,24 @@ public class RESTUserProfileController {
             return ResponseEntity.ok(sessionProfile);
         } else return new ResponseEntity<String>("Login failed", HttpStatus.UNAUTHORIZED);
     }
+
+    //uppfærir user/profile upplýsingar ef þeim er breytt
+    @RequestMapping(value = "/rest/profile", method = RequestMethod.PATCH)
+    public Object myProfilePatch(@RequestBody Profile profile, BindingResult result, Model model, HttpSession httpSession) {
+        if (result.hasErrors()) {
+            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+        }
+
+        Profile sessionProfile = profileService.searchProfileByUsername(profile.getUsername());
+
+        if (profile.getPassword() != null && profile.getPassword() != "")
+            sessionProfile.setPassword(profile.getPassword());
+        if (profile.getName() != null && profile.getName() != "") sessionProfile.setName(profile.getName());
+        if (profile.getAge() != 0) sessionProfile.setAge(profile.getAge());
+
+        profileService.saveProfile(sessionProfile);
+
+        return ResponseEntity.ok(sessionProfile);
+    }
 }
 

@@ -12,6 +12,8 @@ Feature: hike
     When method GET
     Then status 200
     And match response == '#[]'
+    And match each response[*].achievements == '#[]? [{ "name": "#string", "description": "#string", "difficulty": "#number" } ]'
+
 
   Scenario: Get hikes with id
     Given url 'https://hikers-of-iceland.herokuapp.com/rest/hikes/2/'
@@ -35,6 +37,7 @@ Feature: hike
     Given path '/hikes/123456'
     When method GET
     Then status 404
+    Then print 'authInfo---', authInfo
 
 
 
