@@ -7,7 +7,9 @@ import is.hi.g.hikersicelands.hikersicelands.Entities.Profile;
 import is.hi.g.hikersicelands.hikersicelands.Services.AchievementService;
 import is.hi.g.hikersicelands.hikersicelands.Services.HikeService;
 import is.hi.g.hikersicelands.hikersicelands.Services.ProfileService;
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class RESTAchievementController {
@@ -49,11 +52,9 @@ public class RESTAchievementController {
 
     @PostMapping(value = "rest/hikes/{hikeid}/achievements/{achievementid}",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public Object completeAchievement(@PathVariable("hikeid") long hikeid, @PathVariable("achievementid") long id, HttpSession httpSession) {
-        String sessionUsername = (String) httpSession.getAttribute("username");
-        if (sessionUsername == null) {
-            return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
-        }
+    public Object completeAchievement(@PathVariable("hikeid") long hikeid, @PathVariable("achievementid") long id, @RequestBody JSONObject obj, HttpSession httpSession) {
+
+        String sessionUsername = obj.getAsString("username");
 
         Achievement achievement;
         Hike hike;
