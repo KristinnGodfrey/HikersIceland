@@ -2,25 +2,19 @@ package is.hi.g.hikersicelands.hikersicelands.Controllers.RESTControllers;
 
 import is.hi.g.hikersicelands.hikersicelands.Entities.Achievement;
 import is.hi.g.hikersicelands.hikersicelands.Entities.Hike;
-import is.hi.g.hikersicelands.hikersicelands.Entities.Item;
 import is.hi.g.hikersicelands.hikersicelands.Entities.Profile;
 import is.hi.g.hikersicelands.hikersicelands.Services.AchievementService;
 import is.hi.g.hikersicelands.hikersicelands.Services.HikeService;
 import is.hi.g.hikersicelands.hikersicelands.Services.ProfileService;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class RESTAchievementController {
@@ -30,18 +24,19 @@ public class RESTAchievementController {
     private ProfileService profileService;
 
     @Autowired
-    public RESTAchievementController(HikeService hikeService, AchievementService achievementService, ProfileService profileService){
+    public RESTAchievementController(HikeService hikeService, AchievementService achievementService, ProfileService profileService) {
         this.hikeService = hikeService;
         this.achievementService = achievementService;
         this.profileService = profileService;
     }
 
     @RequestMapping(value = "/rest/hikes/{hikeid}/achievements/{id}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-    public ResponseEntity<Object> getAchievement(@PathVariable("id") long id, Model model, HttpSession httpSession){
+    public ResponseEntity<Object> getAchievement(@PathVariable("id") long id, Model model, HttpSession httpSession) {
         Achievement achievement;
         try {
             achievement = achievementService.findAchievementById(id);
-        } finally { }
+        } finally {
+        }
 
         if (achievement == null) {
             return ResponseEntity.notFound().build();
