@@ -1,6 +1,5 @@
 package is.hi.g.hikersicelands.hikersicelands.Entities;
 
-
 public enum ItemType {
     MOUNTAIN("mountain"),
     WILDLIFE("wildlife"),

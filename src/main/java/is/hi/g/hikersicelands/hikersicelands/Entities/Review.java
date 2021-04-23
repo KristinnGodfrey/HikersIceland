@@ -9,7 +9,6 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     private String userId;
     private String reviewText;
     private int rating;

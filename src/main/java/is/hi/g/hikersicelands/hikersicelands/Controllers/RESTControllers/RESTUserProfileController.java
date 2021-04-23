@@ -22,7 +22,7 @@ public class RESTUserProfileController {
     private HikeService hikeService;
 
     @Autowired
-    public RESTUserProfileController(ProfileService profileService, HikeService hikeService){
+    public RESTUserProfileController(ProfileService profileService, HikeService hikeService) {
         this.profileService = profileService;
         this.hikeService = hikeService;
     }
@@ -32,52 +32,25 @@ public class RESTUserProfileController {
     public Object myProfile(Model model, HttpSession httpSession) {
         // Loggar inn í username frá session
         String sessionUsername = (String) httpSession.getAttribute("username");
-        if(sessionUsername == null) {
-            return new ResponseEntity<String>("User is not logged in", HttpStatus.UNAUTHORIZED);
-        }
-
-        Profile profile = profileService.searchProfileByUsername(sessionUsername);
-        if(profile == null) {
-            return new ResponseEntity<String>("Username not found", HttpStatus.UNAUTHORIZED);
-        }
-        return ResponseEntity.ok(profile);
-    }
-    @RequestMapping(value = "/rest/profile", method = RequestMethod.PATCH)
-    public Object myProfilePatch(@RequestBody Profile profile, BindingResult result, Model model, HttpSession httpSession) {
-        if (result.hasErrors()) {
-            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
-        }
-        String sessionUsername = (String) httpSession.getAttribute("username");
-        Profile sessionProfile = profileService.searchProfileByUsername(sessionUsername);
-        String sessionName = sessionProfile.getName();
-        String sessionPassword = sessionProfile.getPassword();
-        int sessionAge = sessionProfile.getAge();
-
         if (sessionUsername == null) {
             return new ResponseEntity<String>("User is not logged in", HttpStatus.UNAUTHORIZED);
         }
 
-        if (profile.getUsername() != null)
-            sessionProfile.setUsername(profile.getUsername());
-        if (profile.getPassword() != null)
-            sessionProfile.setPassword(profile.getPassword());
-        if (profile.getName() != null)
-            sessionProfile.setName(profile.getName());
-        if (profile.getAge() != 0)
-            sessionProfile.setAge(profile.getAge());
-
-        sessionProfile = profileService.saveProfile(sessionProfile);
-
-        return ResponseEntity.ok(sessionProfile);
+        Profile profile = profileService.searchProfileByUsername(sessionUsername);
+        if (profile == null) {
+            return new ResponseEntity<String>("Username not found", HttpStatus.UNAUTHORIZED);
+        }
+        return ResponseEntity.ok(profile);
     }
+
     //uppfærir user/profile upplýsingar ef þeim er breytt
     @RequestMapping(value = "/rest/profile", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public Object myProfileUpdate(@Valid Profile profile, BindingResult result, Model model, HttpSession httpSession){
-        if(result.hasErrors()){
+    public Object myProfileUpdate(@Valid Profile profile, BindingResult result, Model model, HttpSession httpSession) {
+        if (result.hasErrors()) {
             return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
         }
         String sessionUsername = (String) httpSession.getAttribute("username");
-        if(sessionUsername == null) {
+        if (sessionUsername == null) {
             return new ResponseEntity<String>("User is not logged in", HttpStatus.UNAUTHORIZED);
         }
 
@@ -85,7 +58,7 @@ public class RESTUserProfileController {
         String oldPass = profileService.searchProfileByUsername(profile.getUsername()).getPassword();
         profileService.deleteProfileByUsername(profile.getUsername());
 
-        if(!profile.getPassword().equals("")){
+        if (!profile.getPassword().equals("")) {
             // uppfæra password ef breytt
             oldPass = profile.getPassword();
         }
@@ -97,20 +70,20 @@ public class RESTUserProfileController {
 
     //handler fyrir signup view
     @PostMapping(
-            value="/rest/signup",
+            value = "/rest/signup",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = "application/json;charset=UTF-8")
-    public Object signup(@RequestBody Profile profile, BindingResult result){
-        if(result.hasErrors()){
+    public Object signup(@RequestBody Profile profile, BindingResult result) {
+        if (result.hasErrors()) {
             return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
         }
-        if(profile.getUsername() == null || profile.getUsername().isEmpty()) {
+        if (profile.getUsername() == null || profile.getUsername().isEmpty()) {
             return new ResponseEntity<String>("Username missing", HttpStatus.BAD_REQUEST);
         }
-        if(profile.getPassword() == null || profile.getPassword().isEmpty()) {
+        if (profile.getPassword() == null || profile.getPassword().isEmpty()) {
             return new ResponseEntity<String>("Password missing", HttpStatus.BAD_REQUEST);
         }
-        if (profileService.searchProfileByUsername(profile.getUsername()) == null){
+        if (profileService.searchProfileByUsername(profile.getUsername()) == null) {
             // Successfulprofile
             Profile newProfile = profileService.saveProfile(profile);
             return ResponseEntity.ok(newProfile);
@@ -120,25 +93,46 @@ public class RESTUserProfileController {
 
     //handler fyrir login
     @PostMapping(
-            value="/rest/login",
+            value = "/rest/login",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = "application/json;charset=UTF-8")
-    public Object login(@RequestBody Profile profile, BindingResult result, Model model, HttpSession httpSession){
-        if(result.hasErrors()){
+    public Object login(@RequestBody Profile profile, BindingResult result, Model model, HttpSession
+            httpSession) {
+        if (result.hasErrors()) {
             return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
         }
-        if(profile.getUsername() == null || profile.getUsername().isEmpty()) {
+        if (profile.getUsername() == null || profile.getUsername().isEmpty()) {
             return new ResponseEntity<String>("Username missing", HttpStatus.BAD_REQUEST);
         }
-        if(profile.getPassword() == null || profile.getPassword().isEmpty()) {
+        if (profile.getPassword() == null || profile.getPassword().isEmpty()) {
             return new ResponseEntity<String>("Password missing", HttpStatus.BAD_REQUEST);
         }
-        if (profileService.loginProfile(profile.getUsername(), profile.getPassword())){
+        if (profileService.loginProfile(profile.getUsername(), profile.getPassword())) {
             httpSession.setAttribute("username", profile.getUsername());
             Profile sessionProfile = profileService.searchProfileByUsername(profile.getUsername());
             return ResponseEntity.ok(sessionProfile);
+        } else return new ResponseEntity<String>("Login failed", HttpStatus.UNAUTHORIZED);
+    }
+
+    //uppfærir user/profile upplýsingar ef þeim er breytt
+    @RequestMapping(value = "/rest/profile", method = RequestMethod.PATCH)
+    public Object myProfilePatch(@RequestBody Profile profile, BindingResult result, Model
+            model, HttpSession httpSession) {
+        if (result.hasErrors()) {
+            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
         }
-        else return new ResponseEntity<String>("Login failed", HttpStatus.UNAUTHORIZED);
+
+        Profile sessionProfile = profileService.searchProfileByUsername(profile.getUsername());
+
+        if (profile.getPassword() != null && profile.getPassword() != "")
+            sessionProfile.setPassword(profile.getPassword());
+        if (profile.getName() != null && profile.getName() != "")
+            sessionProfile.setName(profile.getName());
+        if (profile.getAge() != 0) sessionProfile.setAge(profile.getAge());
+
+        profileService.saveProfile(sessionProfile);
+
+        return ResponseEntity.ok(sessionProfile);
     }
 }
 
